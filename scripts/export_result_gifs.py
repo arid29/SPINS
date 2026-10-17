@@ -58,7 +58,7 @@ def main():
     parser.add_argument('--baseline-checkpoint', required=True)
     parser.add_argument('--ours-checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
-    parser.add_argument('--subjects', nargs='+', default=['0515', '0516', '0518', '0513', '0514', '0505'])
+    parser.add_argument('--subjects', nargs='+', default=['0515', '0516', '0518', '0513', '0521', '0512'])
     parser.add_argument('--output', default='assets/results')
     parser.add_argument('--ours-description', default='four-view cycle-adapted model')
     parser.add_argument('--resolution', type=int, default=384)

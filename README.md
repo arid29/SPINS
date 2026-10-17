@@ -24,7 +24,7 @@ The current code adapts [LGM](https://github.com/3DTopia/LGM) for four-view cycl
 
 **Baseline** is the LGM initialization before adaptation; **OURS** is the progressive cycle-consistency model at epoch 57. These selected held-out examples show the reconstruction stage using the same four real, calibrated input views for both methods. They are not end-to-end single-image diffusion results.
 
-The gallery selects the six highest all-view PSNR results for OURS among held-out subjects 0505–0525. Each synchronized turntable renders the same cameras for both methods. Both sides use identical framing and resolution, and each frame is a direct model render.
+The gallery shows selected strong all-view PSNR results for OURS among held-out subjects 0505–0525. Each synchronized turntable renders the same cameras for both methods. Both sides use identical framing and resolution, and each frame is a direct model render.
 
 <p align="center">
   <img src="assets/results/comparison_0515.gif" alt="Subject 0515: baseline and OURS synchronized novel-view comparison" width="804" />
@@ -43,16 +43,14 @@ The gallery selects the six highest all-view PSNR results for OURS among held-ou
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0514.gif" alt="Subject 0514: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0521.gif" alt="Subject 0521: baseline and OURS synchronized novel-view comparison" width="804" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0505.gif" alt="Subject 0505: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0512.gif" alt="Subject 0512: baseline and OURS synchronized novel-view comparison" width="804" />
 </p>
 
-Rendering settings and checkpoint hashes are recorded in [the asset provenance](assets/results/provenance.json). The GIFs can be regenerated with [scripts/export_result_gifs.py](scripts/export_result_gifs.py) when the corresponding checkpoints and authorized dataset are available.
-
-## 1. Install
+## Install
 
 Use Linux, Python 3.10, an NVIDIA GPU with BF16 support, a CUDA-compatible driver, CUDA toolkit 12.1 (`nvcc`), and a C++ compiler for the Gaussian rasterizer. The training code was exercised with PyTorch 2.5.1+cu121, torchvision 0.20.1+cu121, xformers 0.0.29.post1, and an RTX 6000 Ada. Batch size 1 used approximately 6.5 GiB of allocated GPU memory; allow additional device memory and host RAM for initialization/checkpointing. This code is single-GPU.
 
@@ -80,7 +78,7 @@ Headless preprocessing uses EGL. The NVIDIA EGL/OpenGL driver libraries must be 
 
 On Ubuntu/Debian, the rendering runtime also needs `libegl1`, `libgl1`, and `libglu1-mesa` (install these with your system package manager or include them in your container). A `Library "GLU" not found` error means the system GLU library is missing, not a missing Python package.
 
-## 2. Obtain THuman2.0
+## Obtain THuman2.0
 
 Request the textured scans through the [official THuman dataset repository](https://github.com/ytrock/THuman2.0-Dataset#download-instructions). Follow its current agreement and request-form instructions to obtain access. The repository also describes the newer THuman2.1 release: check that the provided subject IDs match the subset used below. Obtain optional SMPL-X fittings through the links maintained by the data provider.
 
@@ -107,7 +105,7 @@ Arrange the authorized scans as:
 
 The training entry points explicitly use **IDs 0000–0499 for training (500 subjects)** and **0500–0525 for held-out inference/evaluation (26 subjects)**. This is the split configured in this implementation, not a claim about an official dataset split. If your download is missing any of these IDs, resolve the dataset version/subset first; do not silently replace or duplicate subjects.
 
-## 3. Preprocess the scans
+## Preprocess the scans
 
 The included [preprocessor](scripts/preprocess_thuman.py) is an approximate, portable renderer. It preserves textured meshes, normalizes their height to 1, centers their vertical extent, and renders 12 views at 30° intervals on a horizontal radius-1.5 orbit. It uses square perspective images, 49.1° vertical field of view, near/far planes 0.5/2.5, and depth-derived foreground masks. Its lighting and rasterization are not asserted to match the paper's preprocessing.
 
@@ -154,7 +152,7 @@ Extrinsics are OpenCV/COLMAP **world-to-camera** matrices (3×4 or homogeneous 4
 
 If you already have rendered data, run the validator before training. It checks required files, image/mask shapes, foreground, valid rotations, intrinsics when available, and the ordered circular orbit. Arbitrary camera trajectories are not supported by the progressive-offset helper.
 
-## 4. Prepare initialization and perceptual weights
+## Prepare initialization and perceptual weights
 
 Paper-specific checkpoints will be released later. For this approximate implementation, download the public LGM initialization and prepare the VGG/LPIPS files:
 
@@ -172,7 +170,7 @@ python scripts/prepare_weights.py --lgm-checkpoint /path/to/model.safetensors
 
 The resulting local files are `pretrained/model.safetensors`, `pretrained/vgg16_features.pth`, and `pretrained/lpips_vgg.pth`. Existing files are kept. Checkpoints are ignored by Git. Public initialization and this approximate preprocessing are not guaranteed to reproduce results obtained with a different initialization or rendering pipeline.
 
-## 5. Run the GPU smoke test
+## Run the GPU smoke test
 
 ```bash
 bash scripts/run.sh smoke \
@@ -183,7 +181,7 @@ bash scripts/run.sh smoke \
 
 The test checks all 526 subjects' camera matrices, orbit invariants, schedule boundaries, renderer/ray agreement at known poses, absence of intermediate-view GT in the loss, and finite nonzero gradients at ±5°, 10°, 30°, 60°, and 90°. It saves a report and image grids in the workspace. Those six optimization steps are only a diagnostic; their weights are not used for training.
 
-## 6. Train
+## Train
 
 Fixed-offset baseline (30 epochs):
 
@@ -216,7 +214,7 @@ Each epoch saves evaluation image grids and per-subject metrics. Files include:
 
 Resume from a saved completed epoch with the same arguments plus `--resume`. If a run was interrupted during evaluation, move its incomplete `epoch_NNN` directory aside before resuming. Keep the code, split, learning rate, metric and schedule unchanged; the resume guard checks their configuration. A fresh workspace plus `--checkpoint path/to/model.safetensors` is a weights-only restart with a fresh optimizer and schedule.
 
-## 7. Inference/evaluation
+## Inference/evaluation
 
 ```bash
 bash scripts/run.sh evaluate \
