@@ -4,8 +4,6 @@
 
 The current code adapts [LGM](https://github.com/3DTopia/LGM) for four-view cycle-consistency training. Four observed images produce Gaussians; rendered images from another camera set are detached and fed back into LGM; the returned reconstruction is supervised at the original four cameras. The loss is RGB MSE + mask MSE + VGG LPIPS. Ground-truth images at intermediate viewpoints are not used in the training loss.
 
-Two schedules are provided: fixed 30°/60° offsets, and a progressive schedule starting at ±5° and increasing its maximum magnitude by 5° every three epochs, up to 90°. The progressive schedule continues sampling smaller offsets because a 90° shift permutes the four input cameras.
-
 ## 1. Install
 
 Use Linux, Python 3.10, an NVIDIA GPU with BF16 support, a CUDA-compatible driver, CUDA toolkit 12.1 (`nvcc`), and a C++ compiler for the Gaussian rasterizer. The training code was exercised with PyTorch 2.5.1+cu121, torchvision 0.20.1+cu121, xformers 0.0.29.post1, and an RTX 6000 Ada. Batch size 1 used approximately 6.5 GiB of allocated GPU memory; allow additional device memory and host RAM for initialization/checkpointing. This code is single-GPU.
