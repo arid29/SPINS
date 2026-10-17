@@ -37,6 +37,11 @@ These results show that single-image human 3DGS can be learned without dense mul
     <td align="center" width="33%"><img src="assets/results/comparison_0519.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
     <td align="center" width="33%"><img src="assets/results/comparison_renderpeople.gif" alt="Baseline and OURS novel-view comparison" width="270" /><br /><sub>Renderpeople · external example</sub></td>
   </tr>
+  <tr>
+    <td align="center" width="33%"><img src="assets/results/comparison_humman_1.gif" alt="Baseline and OURS reconstruction of a HuMMan test scan" width="270" /><br /><sub>HuMMan · rendered scans</sub></td>
+    <td align="center" width="33%"><img src="assets/results/comparison_humman_2.gif" alt="Baseline and OURS reconstruction of a HuMMan test scan" width="270" /><br /><sub>HuMMan · rendered scans</sub></td>
+    <td align="center" width="33%"><img src="assets/results/comparison_humman_3.gif" alt="Baseline and OURS reconstruction of a HuMMan test scan" width="270" /><br /><sub>HuMMan · rendered scans</sub></td>
+  </tr>
 </table>
 
 <details>
@@ -99,4 +104,4 @@ Training uses four-view cycle consistency with RGB, mask, and LPIPS losses; the 
 
 ## Acknowledgments
 
-Built on [LGM](https://github.com/3DTopia/LGM). Data: [THuman2.0](https://github.com/ytrock/THuman2.0-Dataset) and one [Renderpeople free sample](https://renderpeople.com/free-3d-people/) used for external inference only. See [THIRD_PARTY.md](THIRD_PARTY.md) and [LICENSE](LICENSE) for dependencies and licensing.
+Built on [LGM](https://github.com/3DTopia/LGM). Data: [THuman2.0](https://github.com/ytrock/THuman2.0-Dataset), [Renderpeople](https://renderpeople.com/free-3d-people/), and [HuMMan](https://huggingface.co/datasets/caizhongang/HuMMan). Renderpeople and HuMMan examples use the existing checkpoints for external inference only. See [THIRD_PARTY.md](THIRD_PARTY.md) and [LICENSE](LICENSE) for dependencies and licensing.

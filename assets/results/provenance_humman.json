@@ -1,0 +1,180 @@
+{
+  "dataset": "HuMMan-Recon rendered test scans",
+  "subjects": [
+    "0500",
+    "0501",
+    "0502"
+  ],
+  "frames": 72,
+  "step_degrees": 5,
+  "frame_duration_ms": 100,
+  "render_resolution": 256,
+  "source_views": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "crop": "none; identical full frames for both methods",
+  "baseline": "local LGM initialization before adaptation",
+  "ours": "progressive four-view cycle adaptation, epoch 57; no adaptation to HuMMan",
+  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37",
+  "ours_sha256": "5888f7430fcf9df638903692a70b859b7e41b6cd6cbad7b3fbe8f0cbe6a832ba",
+  "assets": {
+    "comparison_humman_1.gif": {
+      "local_adapter_id": "0500",
+      "sequence": "p000455_a000986",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.009030866625726858,
+        -0.0,
+        1.8445207201940497
+      ]
+    },
+    "comparison_humman_2.gif": {
+      "local_adapter_id": "0501",
+      "sequence": "p000456_a000396",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.03613648696256344,
+        -0.0,
+        1.6366009155761483
+      ]
+    },
+    "comparison_humman_3.gif": {
+      "local_adapter_id": "0502",
+      "sequence": "p000465_a000048",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.03517945420405927,
+        -0.0,
+        1.8610028925988429
+      ]
+    }
+  },
+  "adapter_ids_note": "0500\u20130502 are isolated loader aliases for these HuMMan scans, not THuman subject IDs",
+  "source_page": "https://huggingface.co/datasets/caizhongang/HuMMan",
+  "source_mesh_archive": "https://huggingface.co/datasets/caizhongang/HuMMan/resolve/main/humman_release_v1.0_recon/recon_textured_meshes.zip",
+  "source_camera_archive": "https://huggingface.co/datasets/caizhongang/HuMMan/resolve/main/humman_release_v1.0_recon/recon_cameras.zip",
+  "source_camera_zip_sha256": "0db8ea4b0ceffc52e5b4ccfdc788f99035a25fb37a231e0cbb889574b6adcd5a",
+  "official_test_split": "https://caizhongang.github.io/projects/HuMMan/splits/test.txt",
+  "download_manifest": {
+    "sequences": [
+      "p000455_a000986",
+      "p000456_a000396",
+      "p000465_a000048"
+    ],
+    "frame": "000000",
+    "bytes_transferred": 13645338,
+    "files": [
+      {
+        "file": "p000455_a000986/textured_meshes/000000.obj",
+        "bytes": 7016103,
+        "sha256": "2ba31f0bdc2cfacbb2b5b6cb10b98a7f4219c93cddaf1771caf6f67055ea0270"
+      },
+      {
+        "file": "p000455_a000986/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000455_a000986/textured_meshes/000000_0.png",
+        "bytes": 942513,
+        "sha256": "b4ef25947c373efda2e15199678fc6eda2acf67d899be0619424c8727440789d"
+      },
+      {
+        "file": "p000456_a000396/textured_meshes/000000.obj",
+        "bytes": 6958706,
+        "sha256": "5dedd032ec5740f3d970bb09add13a174a0b93a3b26408e5090e4717d4f96f86"
+      },
+      {
+        "file": "p000456_a000396/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000456_a000396/textured_meshes/000000_0.png",
+        "bytes": 863805,
+        "sha256": "17aa555e2645e4fd3eb428c89876e4026653b54f328a65b028b1f1cac3482676"
+      },
+      {
+        "file": "p000465_a000048/textured_meshes/000000.obj",
+        "bytes": 19326460,
+        "sha256": "990e63b65220405a890f2739f2a7cc6a0b2e68bbe29e5f4bc9ef62ab860c5ac6"
+      },
+      {
+        "file": "p000465_a000048/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000465_a000048/textured_meshes/000000_0.png",
+        "bytes": 1048663,
+        "sha256": "7f70e7dccb54b446514708e4bb0bd70b168369e0fdd83fe4077239e11e05a55d"
+      }
+    ]
+  },
+  "preprocessing": {
+    "script": "scripts/preprocess_thuman.py",
+    "resolution": 512,
+    "up_estimate": "Normalized mean of R.T @ [0, -1, 0] over the ten calibrated Kinect color cameras",
+    "front": "Camera 000 backward axis [0,0,-1] projected perpendicular to the estimated up vector",
+    "rigid_alignment": "Rows of rotation are right=cross(up,front), up, front; normals rotated identically; translated to center the x/z bounds; faces and UVs retained",
+    "normalization": "Renderer normalizes height to 1 and centers y",
+    "supervision": "Four rendered scan views only, same for both models; no captured Kinect RGB images used"
+  },
+  "training_on_these_samples": false,
+  "scope": "Three external qualitative scan-rendered examples, not a captured-image HuMMan benchmark",
+  "license": "S-Lab License 1.0; see licenses/HuMMan-LICENSE"
+}
