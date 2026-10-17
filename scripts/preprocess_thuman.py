@@ -27,6 +27,15 @@ def camera_pose(degrees, radius=1.5):
     return pose
 
 
+def orbit_fit_scale(vertices, radius, fovy, margin):
+    """Uniform scale fitting every azimuth, including perspective near-side depth."""
+    tangent = math.tan(math.radians(fovy) / 2) * (1 - margin)
+    radial = np.linalg.norm(vertices[:, [0, 2]], axis=1)
+    denominator = max(float(radial.max()) * math.sqrt(1 + tangent ** 2),
+                      float((np.abs(vertices[:, 1]) + tangent * radial).max()))
+    return min(1., tangent * radius / max(denominator, 1e-12))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mesh-root', type=Path, required=True, help='Contains 0000/0000.obj, MTL, textures, etc.')
@@ -36,9 +45,15 @@ def main():
     parser.add_argument('--resolution', type=int, default=1024)
     parser.add_argument('--smplx-root', type=Path, help='Optional trusted local fittings: ID/smplx_param.pkl')
     parser.add_argument('--skip-existing', action='store_true')
+    parser.add_argument('--center-horizontal', action='store_true')
+    parser.add_argument('--fit-margin', type=float, default=0., help='Optional fractional image-half-width margin for all azimuths')
+    parser.add_argument('--unlit', action='store_true', help='Render baked scan textures without adding lighting')
+    parser.add_argument('--min-component-area', type=float, default=0., help='Discard disconnected components below this fraction of mesh area')
     args = parser.parse_args()
     if not 0 <= args.start <= args.end <= 525 or args.resolution < 64:
         parser.error('Expected 0 <= start <= end <= 525 and resolution >= 64')
+    if not 0 <= args.fit_margin < .5 or not 0 <= args.min_component_area <= .001:
+        parser.error('Expected fit-margin in [0, .5) and min-component-area in [0, .001]')
     os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
     import pyglet
     pyglet.options['shadow_window'] = False
@@ -66,10 +81,32 @@ def main():
             source = args.mesh_root / subject / f'{subject}.obj'
             scene_mesh = trimesh.load(str(source), force='scene', process=False)
             meshes = []
+            removed_faces = 0
             for node in scene_mesh.graph.nodes_geometry:
                 transform, geometry = scene_mesh.graph[node]
                 mesh = scene_mesh.geometry[geometry].copy()
                 mesh.apply_transform(transform)
+                if not np.isfinite(mesh.vertices).all():
+                    raise ValueError(f'Non-finite scan vertices: {source}')
+                if args.min_component_area:
+                    before = len(mesh.faces)
+                    mesh.update_faces(mesh.nondegenerate_faces())
+                    # OBJ texture seams duplicate vertex indices. Determine physical
+                    # connectivity on coincident positions without changing the UV mesh.
+                    unique, inverse = trimesh.grouping.unique_rows(mesh.vertices, digits=8)
+                    topology = trimesh.Trimesh(vertices=mesh.vertices[unique], faces=inverse[mesh.faces], process=False)
+                    components = trimesh.graph.connected_components(topology.face_adjacency, nodes=np.arange(len(mesh.faces)))
+                    threshold = float(mesh.area) * args.min_component_area
+                    keep = np.zeros(len(mesh.faces), dtype=bool)
+                    areas = mesh.area_faces
+                    for component in components:
+                        if areas[component].sum() >= threshold:
+                            keep[component] = True
+                    mesh.update_faces(keep)
+                    mesh.remove_unreferenced_vertices()
+                    removed_faces += before - len(mesh.faces)
+                if len(mesh.faces) == 0:
+                    continue
                 meshes.append(mesh)
             if not meshes:
                 raise ValueError(f'No mesh geometry: {source}')
@@ -84,6 +121,18 @@ def main():
                 vertices = mesh.vertices.copy() / height
                 vertices[:, 1] -= low / height + .5
                 mesh.vertices = vertices
+            horizontal_center = np.zeros(3)
+            if args.center_horizontal:
+                points = np.concatenate([m.vertices for m in meshes])
+                horizontal_center = (points.min(0) + points.max(0)) / 2
+                horizontal_center[1] = 0
+                for mesh in meshes:
+                    mesh.vertices -= horizontal_center
+            fit_scale = 1.
+            if args.fit_margin:
+                fit_scale = orbit_fit_scale(np.concatenate([m.vertices for m in meshes]), radius, fovy, args.fit_margin)
+                for mesh in meshes:
+                    mesh.vertices *= fit_scale
             yaw = 0.
             if args.smplx_root:
                 # Pickle is only for trusted fittings obtained through the data provider.
@@ -102,10 +151,13 @@ def main():
             for view in range(views):
                 pose = camera_pose(yaw + view * 30.)
                 scene.set_pose(node, pose)
-                color, depth = renderer.render(scene, flags=pyrender.RenderFlags.RGBA)
+                flags = pyrender.RenderFlags.RGBA | (pyrender.RenderFlags.FLAT if args.unlit else 0)
+                color, depth = renderer.render(scene, flags=flags)
                 mask = (depth > 0).astype(np.uint8) * 255
                 if not mask.any():
                     raise ValueError(f'Empty rendering: subject {subject}, view {view}')
+                if args.fit_margin and (mask[:2].any() or mask[-2:].any() or mask[:, :2].any() or mask[:, -2:].any()):
+                    raise ValueError(f'Foreground clipped at image edge: subject {subject}, view {view}')
                 Image.fromarray(color[:, :, :3]).save(folders['img'] / f'{view:02d}.jpg', quality=95)
                 Image.fromarray(mask).save(folders['mask'] / f'{view:02d}.png')
                 # pyrender OpenGL c2w -> dataset OpenCV world-to-camera.
@@ -114,8 +166,10 @@ def main():
                 np.save(folders['parm'] / f'{view:02d}_intrinsic.npy', intrinsic)
             metadata.write_text(json.dumps({'implementation': 'approximate pyrender preprocessing',
                 'resolution': size, 'fovy_degrees': fovy, 'radius': radius, 'views': views,
-                'yaw_degrees': yaw, 'normalization': 'height=1; y centered; x/z scaled without recentering',
-                'original_height': float(height)}, indent=2))
+                'yaw_degrees': yaw, 'normalization': 'height=1 and y centered, followed by optional horizontal centering and uniform orbit-fit scaling',
+                'original_height': float(height), 'horizontal_center': horizontal_center.tolist(),
+                'fit_scale': fit_scale, 'fit_margin': args.fit_margin, 'unlit': args.unlit,
+                'discarded_faces': removed_faces, 'min_component_area': args.min_component_area}, indent=2))
             print(f'Rendered {subject}: 12 RGB images, masks and camera pairs', flush=True)
     finally:
         renderer.delete()

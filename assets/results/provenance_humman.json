@@ -1,9 +1,22 @@
 {
-  "dataset": "HuMMan-Recon rendered test scans",
+  "dataset": "humman rendered scans",
   "subjects": [
+    "0519",
+    "0516",
+    "0503",
+    "0520",
+    "0506",
+    "0513",
+    "0515",
+    "0507",
+    "0505",
+    "0514",
+    "0525",
+    "0509",
+    "0524",
+    "0511",
     "0500",
-    "0501",
-    "0502"
+    "0522"
   ],
   "frames": 72,
   "step_degrees": 5,
@@ -15,13 +28,684 @@
     6,
     9
   ],
-  "crop": "none; identical full frames for both methods",
-  "baseline": "local LGM initialization before adaptation",
-  "ours": "progressive four-view cycle adaptation, epoch 57; no adaptation to HuMMan",
-  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37",
+  "crop": "none",
+  "layout": "ours",
+  "ours": "progressive four-view cycle adaptation, epoch 57; no adaptation to external data",
   "ours_sha256": "5888f7430fcf9df638903692a70b859b7e41b6cd6cbad7b3fbe8f0cbe6a832ba",
   "assets": {
-    "comparison_humman_1.gif": {
+    "ours_humman_01.gif": {
+      "local_adapter_id": "0519",
+      "sequence": "p000464_a000207",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        -0.009767012361060173,
+        -0.0,
+        1.8561392647642379
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.5659676461999998,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "train"
+    },
+    "ours_humman_02.gif": {
+      "local_adapter_id": "0516",
+      "sequence": "p100056_a000049",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        -0.019523833734425955,
+        -0.0,
+        1.8926199518421323
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.6270810096,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 2,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_03.gif": {
+      "local_adapter_id": "0503",
+      "sequence": "p000474_a000048",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.01559175849768124,
+        -0.0,
+        1.863935612183926
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.6335910151,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_04.gif": {
+      "local_adapter_id": "0520",
+      "sequence": "p000492_a001023",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        -0.0031566933012547593,
+        -0.0,
+        1.8888006263626638
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.761648729,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "train"
+    },
+    "ours_humman_05.gif": {
+      "local_adapter_id": "0506",
+      "sequence": "p000491_a005730",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.04449484366914641,
+        -0.0,
+        1.866623231131853
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.5463888899,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_06.gif": {
+      "local_adapter_id": "0513",
+      "sequence": "p000557_a000793",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999227348738605,
+          0.01243077963682682,
+          -1.734723475976807e-18
+        ],
+        [
+          0.011567736243770225,
+          -0.9305001616232371,
+          -0.36610877713778484
+        ],
+        [
+          -0.004551017531707945,
+          0.36608048969693846,
+          -0.9305720623910196
+        ]
+      ],
+      "translation_after_rotation": [
+        0.026139297468802586,
+        -0.0,
+        1.870812632504109
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.810080519,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_07.gif": {
+      "local_adapter_id": "0515",
+      "sequence": "p100050_a001425",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.05134448100170114,
+        -0.0,
+        1.8636772567203947
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.7183599109999999,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_08.gif": {
+      "local_adapter_id": "0507",
+      "sequence": "p000503_a000064",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999227348738605,
+          0.01243077963682682,
+          -1.734723475976807e-18
+        ],
+        [
+          0.011567736243770225,
+          -0.9305001616232371,
+          -0.36610877713778484
+        ],
+        [
+          -0.004551017531707945,
+          0.36608048969693846,
+          -0.9305720623910196
+        ]
+      ],
+      "translation_after_rotation": [
+        0.05763568925671583,
+        -0.0,
+        1.8521625460837674
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.6557794321,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_09.gif": {
+      "local_adapter_id": "0505",
+      "sequence": "p000482_a000793",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        0.011166100535400902,
+        -0.0,
+        1.9296038021408246
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.730398442,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 2,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_10.gif": {
+      "local_adapter_id": "0514",
+      "sequence": "p000582_a000048",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999227348738605,
+          0.01243077963682682,
+          -1.734723475976807e-18
+        ],
+        [
+          0.011567736243770225,
+          -0.9305001616232371,
+          -0.36610877713778484
+        ],
+        [
+          -0.004551017531707945,
+          0.36608048969693846,
+          -0.9305720623910196
+        ]
+      ],
+      "translation_after_rotation": [
+        0.03732233997149101,
+        -0.0,
+        1.855936452899721
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.6355562836,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_11.gif": {
+      "local_adapter_id": "0525",
+      "sequence": "p100078_a000049",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        -0.029877325704258106,
+        -0.0,
+        1.871900196276734
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.734120387,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "train"
+    },
+    "ours_humman_12.gif": {
+      "local_adapter_id": "0509",
+      "sequence": "p000538_a000978",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999227348738605,
+          0.01243077963682682,
+          -1.734723475976807e-18
+        ],
+        [
+          0.011567736243770225,
+          -0.9305001616232371,
+          -0.36610877713778484
+        ],
+        [
+          -0.004551017531707945,
+          0.36608048969693846,
+          -0.9305720623910196
+        ]
+      ],
+      "translation_after_rotation": [
+        0.04497864764509796,
+        -0.0,
+        1.7732242372109135
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.6338970089999998,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 2,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_13.gif": {
+      "local_adapter_id": "0524",
+      "sequence": "p100051_a000223",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999366587504381,
+          0.011255153797703985,
+          -4.336808689942018e-19
+        ],
+        [
+          0.010472992445291101,
+          -0.9304474431081773,
+          -0.3662756776564559
+        ],
+        [
+          -0.0041224890843816605,
+          0.366252477297349,
+          -0.9305063825451731
+        ]
+      ],
+      "translation_after_rotation": [
+        -0.0006901693737168535,
+        -0.0,
+        1.8349885126953973
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.5942839397000002,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 2,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "train"
+    },
+    "ours_humman_14.gif": {
+      "local_adapter_id": "0511",
+      "sequence": "p000545_a000064",
+      "frame": "000000",
+      "rotation": [
+        [
+          0.9999227348738605,
+          0.01243077963682682,
+          -1.734723475976807e-18
+        ],
+        [
+          0.011567736243770225,
+          -0.9305001616232371,
+          -0.36610877713778484
+        ],
+        [
+          -0.004551017531707945,
+          0.36608048969693846,
+          -0.9305720623910196
+        ]
+      ],
+      "translation_after_rotation": [
+        0.05182648199380055,
+        -0.0,
+        1.8946742653701008
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.7469767740000002,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
+    },
+    "ours_humman_15.gif": {
       "local_adapter_id": "0500",
       "sequence": "p000455_a000986",
       "frame": "000000",
@@ -46,77 +730,295 @@
         0.009030866625726858,
         -0.0,
         1.8445207201940497
-      ]
+      ],
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.81321194,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 2,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "test"
     },
-    "comparison_humman_2.gif": {
-      "local_adapter_id": "0501",
-      "sequence": "p000456_a000396",
+    "ours_humman_16.gif": {
+      "local_adapter_id": "0522",
+      "sequence": "p000553_a000148",
       "frame": "000000",
       "rotation": [
         [
-          0.9999366587504381,
-          0.011255153797703985,
-          -4.336808689942018e-19
+          0.9999227348738605,
+          0.01243077963682682,
+          -1.734723475976807e-18
         ],
         [
-          0.010472992445291101,
-          -0.9304474431081773,
-          -0.3662756776564559
+          0.011567736243770225,
+          -0.9305001616232371,
+          -0.36610877713778484
         ],
         [
-          -0.0041224890843816605,
-          0.366252477297349,
-          -0.9305063825451731
+          -0.004551017531707945,
+          0.36608048969693846,
+          -0.9305720623910196
         ]
       ],
       "translation_after_rotation": [
-        0.03613648696256344,
+        0.01809129702610468,
         -0.0,
-        1.6366009155761483
-      ]
-    },
-    "comparison_humman_3.gif": {
-      "local_adapter_id": "0502",
-      "sequence": "p000465_a000048",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999366587504381,
-          0.011255153797703985,
-          -4.336808689942018e-19
-        ],
-        [
-          0.010472992445291101,
-          -0.9304474431081773,
-          -0.3662756776564559
-        ],
-        [
-          -0.0041224890843816605,
-          0.366252477297349,
-          -0.9305063825451731
-        ]
+        1.9318863987827095
       ],
-      "translation_after_rotation": [
-        0.03517945420405927,
-        -0.0,
-        1.8610028925988429
-      ]
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 1.6382520858999998,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 4,
+        "min_component_area": 1e-05
+      },
+      "provider_split": "train"
     }
   },
-  "adapter_ids_note": "0500\u20130502 are isolated loader aliases for these HuMMan scans, not THuman subject IDs",
+  "candidate_count": 26,
+  "selected_count": 16,
+  "selection": "Curated using 12-view reference comparisons, foreground/unseen PSNR as screening aids, and front/oblique/side/back visual inspection; not a representative dataset benchmark",
+  "candidate_metrics": [
+    {
+      "subject": "0500",
+      "psnr_all": 30.732030868530273,
+      "psnr_unseen": 29.631698608398438,
+      "psnr_foreground": 21.784080505371094
+    },
+    {
+      "subject": "0501",
+      "psnr_all": 29.447660446166992,
+      "psnr_unseen": 28.337905883789062,
+      "psnr_foreground": 20.757049560546875
+    },
+    {
+      "subject": "0502",
+      "psnr_all": 29.690750122070312,
+      "psnr_unseen": 28.72747230529785,
+      "psnr_foreground": 21.604230880737305
+    },
+    {
+      "subject": "0503",
+      "psnr_all": 31.180727005004883,
+      "psnr_unseen": 30.051319122314453,
+      "psnr_foreground": 23.386343002319336
+    },
+    {
+      "subject": "0504",
+      "psnr_all": 29.059398651123047,
+      "psnr_unseen": 28.154890060424805,
+      "psnr_foreground": 20.50900650024414
+    },
+    {
+      "subject": "0505",
+      "psnr_all": 30.976505279541016,
+      "psnr_unseen": 30.22241973876953,
+      "psnr_foreground": 22.374231338500977
+    },
+    {
+      "subject": "0506",
+      "psnr_all": 30.510231018066406,
+      "psnr_unseen": 29.35064125061035,
+      "psnr_foreground": 23.228168487548828
+    },
+    {
+      "subject": "0507",
+      "psnr_all": 32.104427337646484,
+      "psnr_unseen": 31.254924774169922,
+      "psnr_foreground": 22.579317092895508
+    },
+    {
+      "subject": "0508",
+      "psnr_all": 28.742645263671875,
+      "psnr_unseen": 27.500774383544922,
+      "psnr_foreground": 22.19119644165039
+    },
+    {
+      "subject": "0509",
+      "psnr_all": 31.583234786987305,
+      "psnr_unseen": 30.642864227294922,
+      "psnr_foreground": 21.96729850769043
+    },
+    {
+      "subject": "0510",
+      "psnr_all": 30.221050262451172,
+      "psnr_unseen": 29.483673095703125,
+      "psnr_foreground": 21.649763107299805
+    },
+    {
+      "subject": "0511",
+      "psnr_all": 30.64932632446289,
+      "psnr_unseen": 29.636302947998047,
+      "psnr_foreground": 21.81485939025879
+    },
+    {
+      "subject": "0512",
+      "psnr_all": 29.21705436706543,
+      "psnr_unseen": 28.372526168823242,
+      "psnr_foreground": 20.514963150024414
+    },
+    {
+      "subject": "0513",
+      "psnr_all": 30.88397216796875,
+      "psnr_unseen": 29.759567260742188,
+      "psnr_foreground": 22.800724029541016
+    },
+    {
+      "subject": "0514",
+      "psnr_all": 29.913442611694336,
+      "psnr_unseen": 28.795211791992188,
+      "psnr_foreground": 22.30657386779785
+    },
+    {
+      "subject": "0515",
+      "psnr_all": 32.25770950317383,
+      "psnr_unseen": 31.402185440063477,
+      "psnr_foreground": 22.590351104736328
+    },
+    {
+      "subject": "0516",
+      "psnr_all": 32.808563232421875,
+      "psnr_unseen": 32.04155349731445,
+      "psnr_foreground": 23.33664321899414
+    },
+    {
+      "subject": "0517",
+      "psnr_all": 30.140790939331055,
+      "psnr_unseen": 29.010425567626953,
+      "psnr_foreground": 21.81344223022461
+    },
+    {
+      "subject": "0518",
+      "psnr_all": 30.016708374023438,
+      "psnr_unseen": 28.81180763244629,
+      "psnr_foreground": 21.457809448242188
+    },
+    {
+      "subject": "0519",
+      "psnr_all": 32.96481704711914,
+      "psnr_unseen": 31.928180694580078,
+      "psnr_foreground": 24.208484649658203
+    },
+    {
+      "subject": "0520",
+      "psnr_all": 32.08750915527344,
+      "psnr_unseen": 30.981678009033203,
+      "psnr_foreground": 23.304821014404297
+    },
+    {
+      "subject": "0521",
+      "psnr_all": 29.136659622192383,
+      "psnr_unseen": 27.95816421508789,
+      "psnr_foreground": 22.186975479125977
+    },
+    {
+      "subject": "0522",
+      "psnr_all": 30.89948844909668,
+      "psnr_unseen": 29.794912338256836,
+      "psnr_foreground": 21.410720825195312
+    },
+    {
+      "subject": "0523",
+      "psnr_all": 28.509187698364258,
+      "psnr_unseen": 27.289539337158203,
+      "psnr_foreground": 21.256492614746094
+    },
+    {
+      "subject": "0524",
+      "psnr_all": 29.377687454223633,
+      "psnr_unseen": 28.169260025024414,
+      "psnr_foreground": 21.89835548400879
+    },
+    {
+      "subject": "0525",
+      "psnr_all": 30.39950180053711,
+      "psnr_unseen": 29.404422760009766,
+      "psnr_foreground": 21.971786499023438
+    }
+  ],
+  "training_on_these_samples": false,
+  "scope": "OURS-only zero-shot reconstruction from four rendered scan views; no captured-image benchmark",
+  "preprocessing_summary": "Calibrated upright alignment for HuMMan; original textures and UVs retained; physical connectivity handles duplicated UV-seam vertices; only degenerate/tiny disconnected faces removed; horizontal centering; uniform all-azimuth perspective fit; unlit rendering of baked scan textures",
   "source_page": "https://huggingface.co/datasets/caizhongang/HuMMan",
-  "source_mesh_archive": "https://huggingface.co/datasets/caizhongang/HuMMan/resolve/main/humman_release_v1.0_recon/recon_textured_meshes.zip",
-  "source_camera_archive": "https://huggingface.co/datasets/caizhongang/HuMMan/resolve/main/humman_release_v1.0_recon/recon_cameras.zip",
-  "source_camera_zip_sha256": "0db8ea4b0ceffc52e5b4ccfdc788f99035a25fb37a231e0cbb889574b6adcd5a",
-  "official_test_split": "https://caizhongang.github.io/projects/HuMMan/splits/test.txt",
+  "source_download": "https://huggingface.co/datasets/caizhongang/HuMMan/resolve/main/humman_release_v1.0_recon/recon_textured_meshes.zip",
   "download_manifest": {
     "sequences": [
       "p000455_a000986",
       "p000456_a000396",
-      "p000465_a000048"
+      "p000465_a000048",
+      "p000474_a000048",
+      "p000477_a000396",
+      "p000482_a000793",
+      "p000491_a005730",
+      "p000503_a000064",
+      "p000532_a005711",
+      "p000538_a000978",
+      "p000542_a000048",
+      "p000545_a000064",
+      "p000547_a000011",
+      "p000557_a000793",
+      "p000582_a000048",
+      "p100050_a001425",
+      "p100056_a000049",
+      "p100074_a000048",
+      "p000439_a000050",
+      "p000464_a000207",
+      "p000492_a001023",
+      "p000524_a000213",
+      "p000553_a000148",
+      "p000579_a000048",
+      "p100051_a000223",
+      "p100078_a000049"
+    ],
+    "test_sequences": [
+      "p000455_a000986",
+      "p000456_a000396",
+      "p000465_a000048",
+      "p000474_a000048",
+      "p000477_a000396",
+      "p000482_a000793",
+      "p000491_a005730",
+      "p000503_a000064",
+      "p000532_a005711",
+      "p000538_a000978",
+      "p000542_a000048",
+      "p000545_a000064",
+      "p000547_a000011",
+      "p000557_a000793",
+      "p000582_a000048",
+      "p100050_a001425",
+      "p100056_a000049",
+      "p100074_a000048"
     ],
     "frame": "000000",
-    "bytes_transferred": 13645338,
+    "bytes_transferred_this_run": 28518230,
     "files": [
       {
         "file": "p000455_a000986/textured_meshes/000000.obj",
@@ -162,19 +1064,356 @@
         "file": "p000465_a000048/textured_meshes/000000_0.png",
         "bytes": 1048663,
         "sha256": "7f70e7dccb54b446514708e4bb0bd70b168369e0fdd83fe4077239e11e05a55d"
+      },
+      {
+        "file": "p000474_a000048/textured_meshes/000000.obj",
+        "bytes": 5803633,
+        "sha256": "edf6f62414fd2a3c5494207418c7c52838b054f0002211a0795261b7ef0494ff"
+      },
+      {
+        "file": "p000474_a000048/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000474_a000048/textured_meshes/000000_0.png",
+        "bytes": 836865,
+        "sha256": "cfd71f5494f63df2be199468f541a4c1c66b4cbf912fa0f449c8f91fcaba01ab"
+      },
+      {
+        "file": "p000477_a000396/textured_meshes/000000.obj",
+        "bytes": 6275107,
+        "sha256": "d0ce39d87f4351b92a110f80398ee0bbfb46c443f84f29ae699b589b53f3ac6b"
+      },
+      {
+        "file": "p000477_a000396/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000477_a000396/textured_meshes/000000_0.png",
+        "bytes": 890826,
+        "sha256": "9cb11dd2d892cb7854c6af721e07fdd0aace2af3aa464ffa9ed88d375c505650"
+      },
+      {
+        "file": "p000482_a000793/textured_meshes/000000.obj",
+        "bytes": 5964216,
+        "sha256": "d20f3f320fe9c1c8119f4cb0ae2fdafffad27d8e629b499940b2e1c6fbd45d09"
+      },
+      {
+        "file": "p000482_a000793/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000482_a000793/textured_meshes/000000_0.png",
+        "bytes": 1122399,
+        "sha256": "e957f544815703619ab0b7d3e279d2f891dd4d431c756431f05cd3c0254a8cc6"
+      },
+      {
+        "file": "p000491_a005730/textured_meshes/000000.obj",
+        "bytes": 6669183,
+        "sha256": "0356e6132ad69d702177edd6c64ef034e2a8a4b4c2767d47f191e3d4cba30a64"
+      },
+      {
+        "file": "p000491_a005730/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000491_a005730/textured_meshes/000000_0.png",
+        "bytes": 749727,
+        "sha256": "de307cd86cae9a6fdd1958bf46624204020eccec69da04b02727b5c2b80f5807"
+      },
+      {
+        "file": "p000503_a000064/textured_meshes/000000.obj",
+        "bytes": 6792790,
+        "sha256": "a7496b22412ad45250128d9933776cfe2b8d64d7c20ae29247717b61bf8c8fe9"
+      },
+      {
+        "file": "p000503_a000064/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000503_a000064/textured_meshes/000000_0.png",
+        "bytes": 789236,
+        "sha256": "376608785598e853e5353828138abe5423d8460ac466e0dd46ece8ea1d5a6c0f"
+      },
+      {
+        "file": "p000532_a005711/textured_meshes/000000.obj",
+        "bytes": 6281243,
+        "sha256": "ee11a6031e585b434eb71ee205610733c0422a0372e7fb05c812a905324e9e66"
+      },
+      {
+        "file": "p000532_a005711/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000532_a005711/textured_meshes/000000_0.png",
+        "bytes": 820132,
+        "sha256": "67f698fa69e3df579d4aaf17894d4d3332cc9a0b68f5ab270db8db5430a0fe9f"
+      },
+      {
+        "file": "p000538_a000978/textured_meshes/000000.obj",
+        "bytes": 6571343,
+        "sha256": "d355b15fbda11fe3eebfb0f26c3c321f9feef4a1045ad0db127dfa10e0e91f24"
+      },
+      {
+        "file": "p000538_a000978/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000538_a000978/textured_meshes/000000_0.png",
+        "bytes": 868139,
+        "sha256": "c1f08c18fc6dfaa2c9ba75e516125d9394cd728c3de49c0212177081b9705875"
+      },
+      {
+        "file": "p000542_a000048/textured_meshes/000000.obj",
+        "bytes": 5902503,
+        "sha256": "0b809f7ae86d65de313dac4ef87b2542cd85f978f49c3a2db5f3cc8f51fe58b5"
+      },
+      {
+        "file": "p000542_a000048/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000542_a000048/textured_meshes/000000_0.png",
+        "bytes": 954234,
+        "sha256": "4b2e1b92167c9f0b5b1eb46b921edd785180c0615c8e70f46762d87ee328c3e2"
+      },
+      {
+        "file": "p000545_a000064/textured_meshes/000000.obj",
+        "bytes": 6809701,
+        "sha256": "8228c199945785e70d0bf6928f1ac4ba1408b3dfa326de0c8eae3b07a64571fe"
+      },
+      {
+        "file": "p000545_a000064/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000545_a000064/textured_meshes/000000_0.png",
+        "bytes": 1074497,
+        "sha256": "0d1ce6656a0bf37fc98b5de4e4d4783422d5c2ca169d9638d7f8533dbedce85c"
+      },
+      {
+        "file": "p000547_a000011/textured_meshes/000000.obj",
+        "bytes": 4767627,
+        "sha256": "55f5375c5b8a28a25e0afac671c06a5e483e5423cd9c7b4dac6e3864c578e875"
+      },
+      {
+        "file": "p000547_a000011/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000547_a000011/textured_meshes/000000_0.png",
+        "bytes": 889665,
+        "sha256": "b8ad4decb0fed15dbd0fd75a1b1c8625bd24fcde2f4b98c04d9ce92d96cefded"
+      },
+      {
+        "file": "p000557_a000793/textured_meshes/000000.obj",
+        "bytes": 7698042,
+        "sha256": "912125c477e94e442ef1d433e42d43a5d02b88bb94678492dbd04100f343f12d"
+      },
+      {
+        "file": "p000557_a000793/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000557_a000793/textured_meshes/000000_0.png",
+        "bytes": 1079655,
+        "sha256": "95215a8539f3ec5f002c3175db48f5f35bbdea04748c34b1c5c011b11e5a6955"
+      },
+      {
+        "file": "p000582_a000048/textured_meshes/000000.obj",
+        "bytes": 7143861,
+        "sha256": "06eebf47745327f589f4f427f231667019e9b598ed2179504f18ba648594eb16"
+      },
+      {
+        "file": "p000582_a000048/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000582_a000048/textured_meshes/000000_0.png",
+        "bytes": 841589,
+        "sha256": "e4f289e552e308e723f01a95c387e564928696541878d6e0e1ab7061f148b45c"
+      },
+      {
+        "file": "p100050_a001425/textured_meshes/000000.obj",
+        "bytes": 6185313,
+        "sha256": "10e9bc8bc37b11dcd0de058ab56a3ef4728d6b200b71ee4723cab6b983640fce"
+      },
+      {
+        "file": "p100050_a001425/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p100050_a001425/textured_meshes/000000_0.png",
+        "bytes": 810534,
+        "sha256": "f5f7fbfb2f18937deaf4d865b51e1c07fd291ae4dad31cfc4778aaf0a1003410"
+      },
+      {
+        "file": "p100056_a000049/textured_meshes/000000.obj",
+        "bytes": 5612202,
+        "sha256": "309b067516f0ebf2e74fe202b1123411cdb74ce7a9b78dbf163fa088ebac488f"
+      },
+      {
+        "file": "p100056_a000049/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p100056_a000049/textured_meshes/000000_0.png",
+        "bytes": 792773,
+        "sha256": "423c83492a2fa2fee9378904701b69f0ce8ae392b246fa6c6f9de8605ae35a11"
+      },
+      {
+        "file": "p100074_a000048/textured_meshes/000000.obj",
+        "bytes": 6957357,
+        "sha256": "1ccdfed17aa678cf952269dedbe17eb34084f5742abc9a3e252c2c712a5401cf"
+      },
+      {
+        "file": "p100074_a000048/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p100074_a000048/textured_meshes/000000_0.png",
+        "bytes": 852109,
+        "sha256": "2126dc9935813f1c5625a1e9f4a6ca0142cb5a81f22a527149af5912c51eed92"
+      },
+      {
+        "file": "p000439_a000050/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000439_a000050/textured_meshes/000000.obj",
+        "bytes": 6764042,
+        "sha256": "eed0f24206c4376eda3a32342a2b2ab535f3ad5554780157b680c9084771f971"
+      },
+      {
+        "file": "p000439_a000050/textured_meshes/000000_0.png",
+        "bytes": 871925,
+        "sha256": "debf8b1c92edee6b60381e3a00b4476d294b1aa6471176b21647ebe7e7a69293"
+      },
+      {
+        "file": "p000464_a000207/textured_meshes/000000.obj",
+        "bytes": 5895555,
+        "sha256": "133833001e7527065506477401b9cd1ead0035e0d4873e017e652318b92e522c"
+      },
+      {
+        "file": "p000464_a000207/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000464_a000207/textured_meshes/000000_0.png",
+        "bytes": 805764,
+        "sha256": "c72859986aac24bf23f5baa1bf0d9a52c96c6ce30c214229be0dc5cd028d7edd"
+      },
+      {
+        "file": "p000492_a001023/textured_meshes/000000.obj",
+        "bytes": 7390887,
+        "sha256": "2064e60c35704a1e2248a6028365288e4a69fffdd601241169e04ba1b4746f5a"
+      },
+      {
+        "file": "p000492_a001023/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000492_a001023/textured_meshes/000000_0.png",
+        "bytes": 965450,
+        "sha256": "1c4a471200d12ba3a6cdf77ea5695966353d3cad4986071edd4588e5c9b96fb4"
+      },
+      {
+        "file": "p000524_a000213/textured_meshes/000000.obj",
+        "bytes": 7471946,
+        "sha256": "c2d460f78133928e8e742f03e08cfc1291ef558882108beccb0bb85a2d13f8c3"
+      },
+      {
+        "file": "p000524_a000213/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000524_a000213/textured_meshes/000000_0.png",
+        "bytes": 910208,
+        "sha256": "4477648c0d4c82d5c61ac015b2a790351a38b25aac0a7f14a084b637d2e0d8f5"
+      },
+      {
+        "file": "p000553_a000148/textured_meshes/000000.obj",
+        "bytes": 15059799,
+        "sha256": "e64e784d0b8464f7110eaa7bb70bb8063915f72c94d8adbdb69acec4786f2384"
+      },
+      {
+        "file": "p000553_a000148/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000553_a000148/textured_meshes/000000_0.png",
+        "bytes": 863563,
+        "sha256": "23e74ae19bae37c0c52301a0998742145308c5727d0ee48d86ed5f3fca7422de"
+      },
+      {
+        "file": "p000579_a000048/textured_meshes/000000.obj",
+        "bytes": 21929338,
+        "sha256": "c30ca30421c6275c0e9744f3aea91a837807ed6ee618cdfb64221f03240107d1"
+      },
+      {
+        "file": "p000579_a000048/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p000579_a000048/textured_meshes/000000_0.png",
+        "bytes": 1217398,
+        "sha256": "20a4b130c90c1a92ff0bcbf8ba7144b7edd77db5b450ed9b269c456fe98bef9c"
+      },
+      {
+        "file": "p100051_a000223/textured_meshes/000000.obj",
+        "bytes": 7791357,
+        "sha256": "a439b4ee6f6479a0611a32744c8472b8c70f1038e5dcae4af33e84c3f3ad994c"
+      },
+      {
+        "file": "p100051_a000223/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p100051_a000223/textured_meshes/000000_0.png",
+        "bytes": 772042,
+        "sha256": "cbad28ee318620805c24c594b2991853a7c4480ab2919253ad9b971d2b4bbaae"
+      },
+      {
+        "file": "p100078_a000049/textured_meshes/000000.obj",
+        "bytes": 8316148,
+        "sha256": "fb34f68289d201da8e82d32c5d2c9db352430670a30e8d0a13ca40ef1bcec7d9"
+      },
+      {
+        "file": "p100078_a000049/textured_meshes/000000.mtl",
+        "bytes": 142,
+        "sha256": "bd27971937486f28e6bbae48b4167874fbf0c1eca969476d339e5f1cd4f50828"
+      },
+      {
+        "file": "p100078_a000049/textured_meshes/000000_0.png",
+        "bytes": 1053503,
+        "sha256": "80e1387a69381b74c0adeffc0a99efca27b43fadf4292ac01b1544792cd4a9f4"
       }
     ]
   },
-  "preprocessing": {
-    "script": "scripts/preprocess_thuman.py",
-    "resolution": 512,
-    "up_estimate": "Normalized mean of R.T @ [0, -1, 0] over the ten calibrated Kinect color cameras",
-    "front": "Camera 000 backward axis [0,0,-1] projected perpendicular to the estimated up vector",
-    "rigid_alignment": "Rows of rotation are right=cross(up,front), up, front; normals rotated identically; translated to center the x/z bounds; faces and UVs retained",
-    "normalization": "Renderer normalizes height to 1 and centers y",
-    "supervision": "Four rendered scan views only, same for both models; no captured Kinect RGB images used"
-  },
-  "training_on_these_samples": false,
-  "scope": "Three external qualitative scan-rendered examples, not a captured-image HuMMan benchmark",
-  "license": "S-Lab License 1.0; see licenses/HuMMan-LICENSE"
+  "source_camera_zip_sha256": "0db8ea4b0ceffc52e5b4ccfdc788f99035a25fb37a231e0cbb889574b6adcd5a",
+  "up_estimate": "Normalized mean of R.T @ [0,-1,0] over 10 calibrated Kinect color cameras; camera-000 backward axis projected perpendicular to up defines front",
+  "license": "S-Lab License 1.0; see licenses/HuMMan-LICENSE",
+  "adapter_ids_note": "Local 0500\u20130525 aliases are not THuman IDs; external provider train and test scans are used only for inference"
 }

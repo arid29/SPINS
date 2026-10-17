@@ -2,7 +2,9 @@
 
 Sparse-view supervision for feed-forward human 3D Gaussian reconstruction.
 
-**Approximate implementation. Paper-specific code and checkpoints are coming soon.** This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet.
+<p align="center">
+  <a href="assets/figures/SPINS_teaser.pdf"><img src="assets/figures/SPINS_teaser.png" alt="SPINS sparse-view human reconstruction overview" width="900" /></a>
+</p>
 
 <details>
 <summary>Abstract</summary>
@@ -19,33 +21,86 @@ These results show that single-image human 3DGS can be learned without dense mul
 
 </details>
 
+## Method
+
+<p align="center">
+  <a href="assets/figures/SPINS_pipeline.pdf"><img src="assets/figures/SPINS_pipeline.png" alt="SPINS multiview generation and progressive perturb-and-reconstruct pipeline" width="900" /></a>
+</p>
+
+<details>
+<summary>Implementation note</summary>
+
+**Approximate implementation. Paper-specific code and checkpoints are coming soon.** This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet.
+
+</details>
+
 ## Qualitative results
+
+### THuman2.0
 
 <table>
   <tr>
-    <td align="center" width="33%"><img src="assets/results/comparison_0515.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_0516.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_0518.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0515.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0516.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="assets/results/comparison_0513.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_0521.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_0512.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0518.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0513.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="assets/results/comparison_0520.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_0519.gif" alt="Baseline and OURS novel-view comparison" width="270" /></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_renderpeople.gif" alt="Baseline and OURS novel-view comparison" width="270" /><br /><sub>Renderpeople · external example</sub></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0521.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0512.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="assets/results/comparison_humman_1.gif" alt="Baseline and OURS reconstruction of a HuMMan test scan" width="270" /><br /><sub>HuMMan · rendered scans</sub></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_humman_2.gif" alt="Baseline and OURS reconstruction of a HuMMan test scan" width="270" /><br /><sub>HuMMan · rendered scans</sub></td>
-    <td align="center" width="33%"><img src="assets/results/comparison_humman_3.gif" alt="Baseline and OURS reconstruction of a HuMMan test scan" width="270" /><br /><sub>HuMMan · rendered scans</sub></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0520.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0519.gif" alt="Baseline and OURS novel-view comparison" width="400" /></td>
   </tr>
 </table>
 
-<details>
-<summary>Setup, data, and training</summary>
+### Renderpeople
+
+Selected zero-shot reconstructions from rendered scans.
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_01.gif" alt="OURS zero-shot reconstruction on Renderpeople" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_02.gif" alt="OURS zero-shot reconstruction on Renderpeople" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_03.gif" alt="OURS zero-shot reconstruction on Renderpeople" width="240" /></td>
+  </tr>
+</table>
+
+### HuMMan
+
+Selected zero-shot reconstructions from rendered train- and test-split scans.
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_01.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_02.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_03.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_04.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_05.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_06.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_07.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_08.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_09.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_10.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_11.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_12.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_13.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_14.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_15.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="25%"><img src="assets/results/ours_humman_16.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+  </tr>
+</table>
+
+## Setup, data, and training
 
 ### Install
 
@@ -99,8 +154,6 @@ bash scripts/run.sh evaluate \
 Training uses four-view cycle consistency with RGB, mask, and LPIPS losses; the viewpoint-offset cap grows from 5° to 90°. Add `--resume` with the original training arguments to resume a completed epoch. Evaluation requires four calibrated views and saves comparison images and metrics.
 
 `best.safetensors` is selected by all-view PSNR, including the four inputs. Use `--selection-metric direct_psnr_unseen` for the other eight views. Since evaluation selects checkpoints, this split serves as validation. Public initialization and approximate preprocessing may produce different results from the gallery.
-
-</details>
 
 ## Acknowledgments
 

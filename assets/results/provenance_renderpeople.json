@@ -1,7 +1,9 @@
 {
-  "dataset": "Renderpeople free sample",
+  "dataset": "renderpeople rendered scans",
   "subjects": [
-    "0500"
+    "0500",
+    "0501",
+    "0502"
   ],
   "frames": 72,
   "step_degrees": 5,
@@ -13,31 +15,130 @@
     6,
     9
   ],
-  "crop": "none; identical full frames for both methods",
-  "baseline": "local LGM initialization before adaptation",
-  "ours": "progressive four-view cycle adaptation, epoch 57; no adaptation to Renderpeople",
-  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37",
+  "crop": "none",
+  "layout": "ours",
+  "ours": "progressive four-view cycle adaptation, epoch 57; no adaptation to external data",
   "ours_sha256": "5888f7430fcf9df638903692a70b859b7e41b6cd6cbad7b3fbe8f0cbe6a832ba",
-  "asset": "comparison_renderpeople.gif",
-  "source_sample": "rp_posed_00178_29",
+  "assets": {
+    "ours_renderpeople_01.gif": {
+      "local_adapter_id": "0500",
+      "sample": "rp_posed_00178_29",
+      "source_obj": "rp_posed_00178_29.obj",
+      "source_texture": "tex/rp_posed_00178_29_basecolor.jpg",
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 172.5031,
+        "horizontal_center": [
+          0.011057772295106585,
+          0.0,
+          0.009849388213892973
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 16,
+        "min_component_area": 1e-05
+      }
+    },
+    "ours_renderpeople_02.gif": {
+      "local_adapter_id": "0501",
+      "sample": "rp_dennis_posed_004",
+      "source_obj": "rp_dennis_posed_004_100k.obj",
+      "source_texture": "tex/rp_dennis_posed_004_dif_8k.jpg",
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 187.1113,
+        "horizontal_center": [
+          -0.01655592152905784,
+          0.0,
+          3.313535847381671e-05
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 12,
+        "min_component_area": 1e-05
+      }
+    },
+    "ours_renderpeople_03.gif": {
+      "local_adapter_id": "0502",
+      "sample": "rp_mei_posed_001",
+      "source_obj": "rp_mei_posed_001_100k.obj",
+      "source_texture": "tex/rp_mei_posed_001_dif_8k.jpg",
+      "preprocessing": {
+        "implementation": "approximate pyrender preprocessing",
+        "resolution": 512,
+        "fovy_degrees": 49.1,
+        "radius": 1.5,
+        "views": 12,
+        "yaw_degrees": 0.0,
+        "normalization": "height=1; y centered; x/z scaled without recentering",
+        "original_height": 169.7845,
+        "horizontal_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fit_scale": 1.0,
+        "fit_margin": 0.08,
+        "unlit": true,
+        "discarded_faces": 0,
+        "min_component_area": 1e-05
+      }
+    }
+  },
+  "candidate_count": 4,
+  "selected_count": 3,
+  "selection": "Curated using 12-view reference comparisons, foreground/unseen PSNR as screening aids, and front/oblique/side/back visual inspection; not a representative dataset benchmark",
+  "candidate_metrics": [
+    {
+      "subject": "0500",
+      "psnr_all": 29.575260162353516,
+      "psnr_unseen": 28.374813079833984,
+      "psnr_foreground": 21.11764144897461
+    },
+    {
+      "subject": "0501",
+      "psnr_all": 29.434307098388672,
+      "psnr_unseen": 28.22936248779297,
+      "psnr_foreground": 21.945531845092773
+    },
+    {
+      "subject": "0502",
+      "psnr_all": 29.68869400024414,
+      "psnr_unseen": 28.663681030273438,
+      "psnr_foreground": 20.130905151367188
+    },
+    {
+      "subject": "0503",
+      "psnr_all": 27.860336303710938,
+      "psnr_unseen": 26.790084838867188,
+      "psnr_foreground": 19.871566772460938
+    }
+  ],
+  "training_on_these_samples": false,
+  "scope": "OURS-only zero-shot reconstruction from four rendered scan views; no captured-image benchmark",
+  "preprocessing_summary": "Calibrated upright alignment for HuMMan; original textures and UVs retained; physical connectivity handles duplicated UV-seam vertices; only degenerate/tiny disconnected faces removed; horizontal centering; uniform all-azimuth perspective fit; unlit rendering of baked scan textures",
   "source_page": "https://renderpeople.com/free-3d-people/",
-  "source_download": "https://renderpeople.com/sample/free/rp_posed_00178_29_OBJ.zip",
-  "source_zip_sha256": "8a44d132c7ed0c5d1582449132327a285d4777756c609edec9209f082f769b01",
-  "local_subject_mapping": {
-    "0500": "rp_posed_00178_29 (local adapter ID, not a THuman subject)"
+  "source_downloads": [
+    "https://renderpeople.com/sample/free/rp_posed_00178_29_OBJ.zip",
+    "https://renderpeople.com/sample/free/renderpeople_free_posed_people_OBJ.zip"
+  ],
+  "source_zip_sha256": {
+    "posed_00178_29.zip": "8a44d132c7ed0c5d1582449132327a285d4777756c609edec9209f082f769b01",
+    "classic_samples.zip": "42757bb8baef3ee31eb95cb0ade5ac93feaecb2d5b456628df57dc6a85ce4d1f"
   },
-  "preprocessing": {
-    "script": "scripts/preprocess_thuman.py",
-    "resolution": 512,
-    "material": "Original UVs with tex/rp_posed_00178_29_basecolor.jpg assigned via a local diffuse MTL; no supplied MTL in the sample archive",
-    "views": 12,
-    "input_views": [
-      0,
-      3,
-      6,
-      9
-    ]
-  },
-  "training_on_this_sample": false,
-  "scope": "One external qualitative example, not a dataset benchmark"
+  "materials": "Original OBJ UVs assigned to original diffuse/basecolor maps via a local MTL; supplied FBX, normal, specular maps not used"
 }
