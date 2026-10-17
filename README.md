@@ -95,7 +95,7 @@ Selected zero-shot reconstructions from rendered train- and test-split scans.
 
 ### Install
 
-Requires Linux, Python 3.10, an NVIDIA GPU with BF16 support, CUDA toolkit 12.1 (`nvcc`), and a C++ compiler. Training uses one GPU (about 6.5 GiB allocated memory, plus runtime overhead).
+Requires Linux, Python 3.10, an NVIDIA GPU with BF16 support, CUDA toolkit 12.1 (`nvcc`), and a C++ compiler. Training uses one GPU.
 
 ```bash
 git clone https://github.com/arid29/SPINS.git
