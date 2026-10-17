@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+pretrained/
+THumanDataset/
+data/
+workspace*/
+third_party/
+*.safetensors
+*.pth
+*.pt
+*.sif
+*.log
+slurm-*.out
+.pytest_cache/

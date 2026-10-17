@@ -1,0 +1,14 @@
+# Install CUDA PyTorch and xformers first; see README.md.
+numpy==1.24.4
+Pillow==11.0.0
+tyro==0.9.28
+safetensors==0.6.2
+scikit-image==0.24.0
+scipy==1.15.3
+kiui==0.2.17
+roma==1.5.4
+plyfile==1.1.2
+opencv-python-headless==4.11.0.86
+lpips==0.1.4
+packaging
+ninja
