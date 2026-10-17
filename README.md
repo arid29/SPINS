@@ -22,29 +22,20 @@ The current code adapts [LGM](https://github.com/3DTopia/LGM) for four-view cycl
 
 ## Qualitative results
 
-<p align="center">
-  <img src="assets/results/comparison_0515.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
-</p>
-
-<p align="center">
-  <img src="assets/results/comparison_0516.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
-</p>
-
-<p align="center">
-  <img src="assets/results/comparison_0518.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
-</p>
-
-<p align="center">
-  <img src="assets/results/comparison_0513.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
-</p>
-
-<p align="center">
-  <img src="assets/results/comparison_0521.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
-</p>
-
-<p align="center">
-  <img src="assets/results/comparison_0512.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
-</p>
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="assets/results/comparison_0515.gif" alt="Baseline and OURS synchronized novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0516.gif" alt="Baseline and OURS synchronized novel-view comparison" width="400" /></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="assets/results/comparison_0518.gif" alt="Baseline and OURS synchronized novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0513.gif" alt="Baseline and OURS synchronized novel-view comparison" width="400" /></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="assets/results/comparison_0521.gif" alt="Baseline and OURS synchronized novel-view comparison" width="400" /></td>
+    <td align="center" width="50%"><img src="assets/results/comparison_0512.gif" alt="Baseline and OURS synchronized novel-view comparison" width="400" /></td>
+  </tr>
+</table>
 
 ## Install
 
