@@ -1,4 +1,4 @@
-# SPINS
+# SPINS: Sparsely-Supervised Human Novel View Synthesis from a Single Image
 
 Sparse-view supervision for feed-forward human 3D Gaussian reconstruction.
 
