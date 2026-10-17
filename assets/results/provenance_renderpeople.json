@@ -1,0 +1,43 @@
+{
+  "dataset": "Renderpeople free sample",
+  "subjects": [
+    "0500"
+  ],
+  "frames": 72,
+  "step_degrees": 5,
+  "frame_duration_ms": 100,
+  "render_resolution": 256,
+  "source_views": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "crop": "none; identical full frames for both methods",
+  "baseline": "local LGM initialization before adaptation",
+  "ours": "progressive four-view cycle adaptation, epoch 57; no adaptation to Renderpeople",
+  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37",
+  "ours_sha256": "5888f7430fcf9df638903692a70b859b7e41b6cd6cbad7b3fbe8f0cbe6a832ba",
+  "asset": "comparison_renderpeople.gif",
+  "source_sample": "rp_posed_00178_29",
+  "source_page": "https://renderpeople.com/free-3d-people/",
+  "source_download": "https://renderpeople.com/sample/free/rp_posed_00178_29_OBJ.zip",
+  "source_zip_sha256": "8a44d132c7ed0c5d1582449132327a285d4777756c609edec9209f082f769b01",
+  "local_subject_mapping": {
+    "0500": "rp_posed_00178_29 (local adapter ID, not a THuman subject)"
+  },
+  "preprocessing": {
+    "script": "scripts/preprocess_thuman.py",
+    "resolution": 512,
+    "material": "Original UVs with tex/rp_posed_00178_29_basecolor.jpg assigned via a local diffuse MTL; no supplied MTL in the sample archive",
+    "views": 12,
+    "input_views": [
+      0,
+      3,
+      6,
+      9
+    ]
+  },
+  "training_on_this_sample": false,
+  "scope": "One external qualitative example, not a dataset benchmark"
+}

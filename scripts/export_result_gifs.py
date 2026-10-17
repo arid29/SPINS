@@ -58,7 +58,8 @@ def main():
     parser.add_argument('--baseline-checkpoint', required=True)
     parser.add_argument('--ours-checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
-    parser.add_argument('--subjects', nargs='+', default=['0515', '0516', '0518', '0513', '0521', '0512'])
+    parser.add_argument('--subjects', nargs='+', default=['0515', '0516', '0518', '0513', '0521', '0512', '0520', '0519'])
+    parser.add_argument('--dataset-name', default='THuman2.0', help='Source dataset recorded in the asset provenance')
     parser.add_argument('--output', default='assets/results')
     parser.add_argument('--ours-description', default='four-view cycle-adapted model')
     parser.add_argument('--resolution', type=int, default=256)
@@ -106,7 +107,7 @@ def main():
         quantized[0].save(target, save_all=True, append_images=quantized[1:], duration=100,
                           loop=0, disposal=2, optimize=False)
         print(f'Saved {target} ({target.stat().st_size} bytes)', flush=True)
-    metadata = {'subjects': dataset.items, 'frames': len(angles), 'step_degrees': args.step_degrees,
+    metadata = {'dataset': args.dataset_name, 'subjects': dataset.items, 'frames': len(angles), 'step_degrees': args.step_degrees,
                 'frame_duration_ms': 100, 'render_resolution': size,
                 'source_views': [0, 3, 6, 9], 'crop': 'none; identical full frames for both methods',
                 'baseline': 'local LGM initialization before adaptation',
