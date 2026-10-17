@@ -1,0 +1,22 @@
+{
+  "subjects": [
+    "0515",
+    "0502",
+    "0505"
+  ],
+  "frames": 72,
+  "step_degrees": 5,
+  "frame_duration_ms": 100,
+  "render_resolution": 384,
+  "source_views": [
+    0,
+    3,
+    6,
+    9
+  ],
+  "crop": "none; identical full frames for both methods",
+  "baseline": "local LGM initialization before adaptation",
+  "ours": "progressive four-view cycle adaptation, epoch 57",
+  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37",
+  "ours_sha256": "5888f7430fcf9df638903692a70b859b7e41b6cd6cbad7b3fbe8f0cbe6a832ba"
+}

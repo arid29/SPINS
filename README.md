@@ -1,8 +1,44 @@
 # SPINS
 
-**This repository currently provides an approximate implementation. Paper-specific implementations, configurations, preprocessing, and checkpoints will be updated soon.** It is a runnable research scaffold, not a claim of exact reproduction of the paper. No trained checkpoints or THuman data are distributed here.
+**This repository currently provides an approximate implementation. Paper-specific implementations, configurations, preprocessing, and checkpoints will be updated soon.** It is a runnable research scaffold, not a claim of exact reproduction of the paper. No trained checkpoints or raw dataset files are distributed here.
+
+## Abstract
+
+Existing human novel view synthesis (NVS) methods typically rely on textured 3D scans, dense pose-aligned multiview images, or parametric body priors such as SMPL, making their training data costly to acquire and difficult to scale beyond controlled capture settings.
+We present **SPINS**, a framework for single-image human NVS that learns feed-forward human 3D Gaussian Splatting (3DGS) from sparse 2D view supervision.
+Given a single input image, a human-specific multiview diffusion module first synthesizes a small set of anatomically plausible canonical views.
+An object-centric 3DGS reconstruction model, initialized from large-scale pretraining, is then adapted with only sparse 2D human views to convert the synthesized views into a 3DGS representation.
+We introduce a sparsely supervised perturb-and-reconstruct objective: Gaussians predicted from the synthesized views are rendered at offset viewpoints, and the reconstruction obtained from those renderings must reproduce the original views.
+Geometric errors that are invisible from the supervised views become visible once the asset is rendered from elsewhere, and the round trip converts them into reconstruction error that the model is driven to correct.
+The objective, therefore, enforces stable geometry and appearance across viewpoints with nothing beyond the sparse 2D views as supervision.
+Trained once on four views per subject of a single dataset, SPINS remains competitive with densely supervised methods across three benchmarks despite using no dense multiview, textured-mesh, or SMPL supervision, and is markedly more resilient to partial occlusions of the input view.
+These results show that single-image human 3DGS can be learned without dense multiview capture, textured meshes, or explicit parametric body priors.
+
+## Current implementation
+
+The abstract describes the full framework. The current approximate release covers the four-view reconstruction/adaptation stage; the human-specific diffusion module and paper-specific evaluation are not included yet.
 
 The current code adapts [LGM](https://github.com/3DTopia/LGM) for four-view cycle-consistency training. Four observed images produce Gaussians; rendered images from another camera set are detached and fed back into LGM; the returned reconstruction is supervised at the original four cameras. The loss is RGB MSE + mask MSE + VGG LPIPS. Ground-truth images at intermediate viewpoints are not used in the training loss.
+
+## Qualitative results
+
+**Baseline** is the LGM initialization before adaptation; **OURS** is the progressive cycle-consistency model at epoch 57. These selected held-out examples show the reconstruction stage using the same four real, calibrated input views for both methods. They are not end-to-end single-image diffusion results.
+
+Each synchronized turntable renders the same cameras at 5° intervals. Both sides use identical framing and resolution, and each frame is a direct model render.
+
+<p align="center">
+  <img src="assets/results/comparison_0515.gif" alt="Subject 0515: baseline and OURS synchronized novel-view comparison" width="804" />
+</p>
+
+<p align="center">
+  <img src="assets/results/comparison_0502.gif" alt="Subject 0502: baseline and OURS synchronized novel-view comparison" width="804" />
+</p>
+
+<p align="center">
+  <img src="assets/results/comparison_0505.gif" alt="Subject 0505: baseline and OURS synchronized novel-view comparison" width="804" />
+</p>
+
+Rendering settings and checkpoint hashes are recorded in [the asset provenance](assets/results/provenance.json). The GIFs can be regenerated with [scripts/export_result_gifs.py](scripts/export_result_gifs.py) when the corresponding checkpoints and authorized dataset are available.
 
 ## 1. Install
 
@@ -36,7 +72,7 @@ On Ubuntu/Debian, the rendering runtime also needs `libegl1`, `libgl1`, and `lib
 
 Request the textured scans through the [official THuman dataset repository](https://github.com/ytrock/THuman2.0-Dataset#download-instructions). Follow its current agreement and request-form instructions to obtain access. The repository also describes the newer THuman2.1 release: check that the provided subject IDs match the subset used below. Obtain optional SMPL-X fittings through the links maintained by the data provider.
 
-Keep the original OBJ, MTL, and texture files together. Dataset use and redistribution are governed by the provider's terms; this repository does not mirror the scans or rendered data.
+Keep the original OBJ, MTL, and texture files together. Dataset use and redistribution are governed by the provider's terms; this repository does not mirror source scans or preprocessed training data.
 
 Arrange the authorized scans as:
 
