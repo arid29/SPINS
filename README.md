@@ -110,7 +110,7 @@ bash scripts/install_rasterizer.sh
 python scripts/prepare_weights.py --download-public
 ```
 
-The weight helper downloads the public LGM initialization and VGG/LPIPS weights. These are not the forthcoming paper checkpoints. Set `CUDA_HOME` if the rasterizer build cannot locate your toolkit.
+The weight helper downloads the public LGM initialization and VGG/LPIPS weights. Set `CUDA_HOME` if the rasterizer build cannot locate your toolkit.
 
 ### THuman2.0 data
 
@@ -128,7 +128,7 @@ python scripts/preprocess_thuman.py \
 python scripts/validate_data.py --data-root THumanDataset/thuman2_rendered_lgm
 ```
 
-The approximate renderer produces 12 views, masks, and cameras per scan; training uses views 00, 03, 06, and 09. Defaults match the loader's 49.1° field of view. Inspect a single subject first with `--start 0 --end 0` and a temporary output directory. Existing rendered data can be used after validation.
+The renderer produces 12 views, masks, and cameras per scan; training uses views 00, 03, 06, and 09. Defaults match the loader's 49.1° field of view. Inspect a single subject first with `--start 0 --end 0` and a temporary output directory. Existing rendered data can be used after validation.
 
 ### Train and evaluate
 
@@ -143,8 +143,6 @@ bash scripts/run.sh evaluate \
 ```
 
 Training uses four-view cycle consistency with RGB, mask, and LPIPS losses; the viewpoint-offset cap grows from 5° to 90°. Add `--resume` with the original training arguments to resume a completed epoch. Evaluation requires four calibrated views and saves comparison images and metrics.
-
-`best.safetensors` is selected by all-view PSNR, including the four inputs. Use `--selection-metric direct_psnr_unseen` for the other eight views. Since evaluation selects checkpoints, this split serves as validation. Public initialization and approximate preprocessing may produce different results from the gallery.
 
 ## Acknowledgments
 

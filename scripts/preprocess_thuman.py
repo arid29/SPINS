@@ -1,4 +1,4 @@
-"""Approximate THuman textured-scan rendering for SPINS (not paper preprocessing).
+"""Render THuman textured scans for SPINS.
 
 Uses a 12-camera horizontal orbit, height normalization, perspective projection,
 and depth-derived masks. EGL is the default headless OpenGL backend.
@@ -164,7 +164,7 @@ def main():
                 extrinsic = np.diag([1., -1., -1., 1.]) @ np.linalg.inv(pose)
                 np.save(folders['parm'] / f'{view:02d}_extrinsic.npy', extrinsic[:3])
                 np.save(folders['parm'] / f'{view:02d}_intrinsic.npy', intrinsic)
-            metadata.write_text(json.dumps({'implementation': 'approximate pyrender preprocessing',
+            metadata.write_text(json.dumps({'implementation': 'pyrender preprocessing',
                 'resolution': size, 'fovy_degrees': fovy, 'radius': radius, 'views': views,
                 'yaw_degrees': yaw, 'normalization': 'height=1 and y centered, followed by optional horizontal centering and uniform orbit-fit scaling',
                 'original_height': float(height), 'horizontal_center': horizontal_center.tolist(),

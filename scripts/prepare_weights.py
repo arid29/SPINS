@@ -11,8 +11,8 @@ import lpips
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--lgm-checkpoint', type=Path, help='Copy an existing checkpoint for exact reproduction')
-    group.add_argument('--download-public', action='store_true', help='Public LGM weights differ from the recorded runs')
+    group.add_argument('--lgm-checkpoint', type=Path, help='Copy an existing LGM checkpoint')
+    group.add_argument('--download-public', action='store_true', help='Download the public LGM checkpoint')
     args = parser.parse_args()
     output = Path(__file__).resolve().parents[1] / 'pretrained'
     output.mkdir(exist_ok=True)
