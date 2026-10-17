@@ -77,6 +77,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--baseline-checkpoint')
     parser.add_argument('--layout', choices=('comparison', 'ours'), default='comparison')
+    parser.add_argument('--no-labels', action='store_true', help='Omit text headers and their reserved space')
     parser.add_argument('--review', action='store_true', help='Save 12-view reference comparisons and selection metrics locally')
     parser.add_argument('--ours-checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
@@ -109,21 +110,24 @@ def main():
     except OSError:
         font = ImageFont.load_default()
     size = args.resolution
-    width, height = (size * 2 + 36 if baseline is not None else size + 24), size + 56
+    top = 12 if args.no_labels else 44
+    width, height = (size * 2 + 36 if baseline is not None else size + 24), size + top + 12
     for subject in dataset.items:
         frames = []
         for index, right in enumerate(ours[subject]):
             canvas = Image.new('RGB', (width, height), 'white')
             draw = ImageDraw.Draw(canvas)
             if baseline is not None:
-                canvas.paste(baseline[subject][index], (12, 44))
-                canvas.paste(right, (size + 24, 44))
-                draw.text((size / 2 + 12, 22), 'Baseline', font=font, anchor='mm', fill='#374151')
-                draw.text((size * 1.5 + 24, 22), 'OURS', font=font, anchor='mm', fill='#176752')
-                draw.line((size + 18, 44, size + 18, size + 44), fill='#e5e7eb')
+                canvas.paste(baseline[subject][index], (12, top))
+                canvas.paste(right, (size + 24, top))
+                if not args.no_labels:
+                    draw.text((size / 2 + 12, 22), 'Baseline', font=font, anchor='mm', fill='#374151')
+                    draw.text((size * 1.5 + 24, 22), 'OURS', font=font, anchor='mm', fill='#176752')
+                draw.line((size + 18, top, size + 18, size + top), fill='#e5e7eb')
             else:
-                canvas.paste(right, (12, 44))
-                draw.text((width / 2, 22), 'OURS', font=font, anchor='mm', fill='#176752')
+                canvas.paste(right, (12, top))
+                if not args.no_labels:
+                    draw.text((width / 2, 22), 'OURS', font=font, anchor='mm', fill='#176752')
             frames.append(canvas)
         # One palette per GIF reduces flicker and treats both methods equally.
         sample = Image.new('RGB', (width, height * 12), 'white')
@@ -138,7 +142,7 @@ def main():
         print(f'Saved {target} ({target.stat().st_size} bytes)', flush=True)
     metadata = {'dataset': args.dataset_name, 'subjects': dataset.items, 'frames': len(angles), 'step_degrees': args.step_degrees,
                 'frame_duration_ms': 100, 'render_resolution': size,
-                'source_views': [0, 3, 6, 9], 'crop': 'none', 'layout': args.layout,
+                'source_views': [0, 3, 6, 9], 'crop': 'none', 'layout': args.layout, 'labels': not args.no_labels,
                 'ours': args.ours_description,
                 'ours_sha256': digest(args.ours_checkpoint)}
     if baseline is not None:

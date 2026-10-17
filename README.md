@@ -63,9 +63,9 @@ Selected zero-shot reconstructions from rendered scans.
 
 <table>
   <tr>
-    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_01.gif" alt="OURS zero-shot reconstruction on Renderpeople" width="240" /></td>
-    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_02.gif" alt="OURS zero-shot reconstruction on Renderpeople" width="240" /></td>
-    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_03.gif" alt="OURS zero-shot reconstruction on Renderpeople" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_01.gif" alt="Zero-shot reconstruction on Renderpeople" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_02.gif" alt="Zero-shot reconstruction on Renderpeople" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_renderpeople_03.gif" alt="Zero-shot reconstruction on Renderpeople" width="240" /></td>
   </tr>
 </table>
 
@@ -75,28 +75,19 @@ Selected zero-shot reconstructions from rendered train- and test-split scans.
 
 <table>
   <tr>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_01.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_02.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_03.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_04.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_01.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_02.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_03.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
   </tr>
   <tr>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_05.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_06.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_07.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_08.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_04.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_05.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_06.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
   </tr>
   <tr>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_09.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_10.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_11.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_12.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-  </tr>
-  <tr>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_13.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_14.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_15.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
-    <td align="center" width="25%"><img src="assets/results/ours_humman_16.gif" alt="OURS zero-shot reconstruction on HuMMan" width="200" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_07.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_08.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
+    <td align="center" width="33%"><img src="assets/results/ours_humman_09.gif" alt="Zero-shot reconstruction on HuMMan" width="240" /></td>
   </tr>
 </table>
 

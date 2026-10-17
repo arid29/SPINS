@@ -7,15 +7,8 @@
     "0520",
     "0506",
     "0513",
-    "0515",
     "0507",
     "0505",
-    "0514",
-    "0525",
-    "0509",
-    "0524",
-    "0511",
-    "0500",
     "0522"
   ],
   "frames": 72,
@@ -322,54 +315,6 @@
       "provider_split": "test"
     },
     "ours_humman_07.gif": {
-      "local_adapter_id": "0515",
-      "sequence": "p100050_a001425",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999366587504381,
-          0.011255153797703985,
-          -4.336808689942018e-19
-        ],
-        [
-          0.010472992445291101,
-          -0.9304474431081773,
-          -0.3662756776564559
-        ],
-        [
-          -0.0041224890843816605,
-          0.366252477297349,
-          -0.9305063825451731
-        ]
-      ],
-      "translation_after_rotation": [
-        0.05134448100170114,
-        -0.0,
-        1.8636772567203947
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.7183599109999999,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 0,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "test"
-    },
-    "ours_humman_08.gif": {
       "local_adapter_id": "0507",
       "sequence": "p000503_a000064",
       "frame": "000000",
@@ -417,7 +362,7 @@
       },
       "provider_split": "test"
     },
-    "ours_humman_09.gif": {
+    "ours_humman_08.gif": {
       "local_adapter_id": "0505",
       "sequence": "p000482_a000793",
       "frame": "000000",
@@ -465,295 +410,7 @@
       },
       "provider_split": "test"
     },
-    "ours_humman_10.gif": {
-      "local_adapter_id": "0514",
-      "sequence": "p000582_a000048",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999227348738605,
-          0.01243077963682682,
-          -1.734723475976807e-18
-        ],
-        [
-          0.011567736243770225,
-          -0.9305001616232371,
-          -0.36610877713778484
-        ],
-        [
-          -0.004551017531707945,
-          0.36608048969693846,
-          -0.9305720623910196
-        ]
-      ],
-      "translation_after_rotation": [
-        0.03732233997149101,
-        -0.0,
-        1.855936452899721
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.6355562836,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 0,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "test"
-    },
-    "ours_humman_11.gif": {
-      "local_adapter_id": "0525",
-      "sequence": "p100078_a000049",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999366587504381,
-          0.011255153797703985,
-          -4.336808689942018e-19
-        ],
-        [
-          0.010472992445291101,
-          -0.9304474431081773,
-          -0.3662756776564559
-        ],
-        [
-          -0.0041224890843816605,
-          0.366252477297349,
-          -0.9305063825451731
-        ]
-      ],
-      "translation_after_rotation": [
-        -0.029877325704258106,
-        -0.0,
-        1.871900196276734
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.734120387,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 0,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "train"
-    },
-    "ours_humman_12.gif": {
-      "local_adapter_id": "0509",
-      "sequence": "p000538_a000978",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999227348738605,
-          0.01243077963682682,
-          -1.734723475976807e-18
-        ],
-        [
-          0.011567736243770225,
-          -0.9305001616232371,
-          -0.36610877713778484
-        ],
-        [
-          -0.004551017531707945,
-          0.36608048969693846,
-          -0.9305720623910196
-        ]
-      ],
-      "translation_after_rotation": [
-        0.04497864764509796,
-        -0.0,
-        1.7732242372109135
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.6338970089999998,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 2,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "test"
-    },
-    "ours_humman_13.gif": {
-      "local_adapter_id": "0524",
-      "sequence": "p100051_a000223",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999366587504381,
-          0.011255153797703985,
-          -4.336808689942018e-19
-        ],
-        [
-          0.010472992445291101,
-          -0.9304474431081773,
-          -0.3662756776564559
-        ],
-        [
-          -0.0041224890843816605,
-          0.366252477297349,
-          -0.9305063825451731
-        ]
-      ],
-      "translation_after_rotation": [
-        -0.0006901693737168535,
-        -0.0,
-        1.8349885126953973
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.5942839397000002,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 2,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "train"
-    },
-    "ours_humman_14.gif": {
-      "local_adapter_id": "0511",
-      "sequence": "p000545_a000064",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999227348738605,
-          0.01243077963682682,
-          -1.734723475976807e-18
-        ],
-        [
-          0.011567736243770225,
-          -0.9305001616232371,
-          -0.36610877713778484
-        ],
-        [
-          -0.004551017531707945,
-          0.36608048969693846,
-          -0.9305720623910196
-        ]
-      ],
-      "translation_after_rotation": [
-        0.05182648199380055,
-        -0.0,
-        1.8946742653701008
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.7469767740000002,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 0,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "test"
-    },
-    "ours_humman_15.gif": {
-      "local_adapter_id": "0500",
-      "sequence": "p000455_a000986",
-      "frame": "000000",
-      "rotation": [
-        [
-          0.9999366587504381,
-          0.011255153797703985,
-          -4.336808689942018e-19
-        ],
-        [
-          0.010472992445291101,
-          -0.9304474431081773,
-          -0.3662756776564559
-        ],
-        [
-          -0.0041224890843816605,
-          0.366252477297349,
-          -0.9305063825451731
-        ]
-      ],
-      "translation_after_rotation": [
-        0.009030866625726858,
-        -0.0,
-        1.8445207201940497
-      ],
-      "preprocessing": {
-        "implementation": "approximate pyrender preprocessing",
-        "resolution": 512,
-        "fovy_degrees": 49.1,
-        "radius": 1.5,
-        "views": 12,
-        "yaw_degrees": 0.0,
-        "normalization": "height=1; y centered; x/z scaled without recentering",
-        "original_height": 1.81321194,
-        "horizontal_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "fit_scale": 1.0,
-        "fit_margin": 0.08,
-        "unlit": true,
-        "discarded_faces": 2,
-        "min_component_area": 1e-05
-      },
-      "provider_split": "test"
-    },
-    "ours_humman_16.gif": {
+    "ours_humman_09.gif": {
       "local_adapter_id": "0522",
       "sequence": "p000553_a000148",
       "frame": "000000",
@@ -803,7 +460,7 @@
     }
   },
   "candidate_count": 26,
-  "selected_count": 16,
+  "selected_count": 9,
   "selection": "Curated using 12-view reference comparisons, foreground/unseen PSNR as screening aids, and front/oblique/side/back visual inspection; not a representative dataset benchmark",
   "candidate_metrics": [
     {
@@ -1415,5 +1072,187 @@
   "source_camera_zip_sha256": "0db8ea4b0ceffc52e5b4ccfdc788f99035a25fb37a231e0cbb889574b6adcd5a",
   "up_estimate": "Normalized mean of R.T @ [0,-1,0] over 10 calibrated Kinect color cameras; camera-000 backward axis projected perpendicular to up defines front",
   "license": "S-Lab License 1.0; see licenses/HuMMan-LICENSE",
-  "adapter_ids_note": "Local 0500\u20130525 aliases are not THuman IDs; external provider train and test scans are used only for inference"
+  "adapter_ids_note": "Local 0500\u20130525 aliases are not THuman IDs; external provider train and test scans are used only for inference",
+  "labels": false,
+  "baseline_candidate_metrics": [
+    {
+      "subject": "0500",
+      "psnr_all": 25.97843360900879,
+      "psnr_unseen": 26.174936294555664,
+      "psnr_foreground": 21.6950626373291
+    },
+    {
+      "subject": "0501",
+      "psnr_all": 24.67101287841797,
+      "psnr_unseen": 24.594276428222656,
+      "psnr_foreground": 20.95722198486328
+    },
+    {
+      "subject": "0502",
+      "psnr_all": 24.727474212646484,
+      "psnr_unseen": 24.75408935546875,
+      "psnr_foreground": 20.41773223876953
+    },
+    {
+      "subject": "0503",
+      "psnr_all": 25.55183219909668,
+      "psnr_unseen": 25.410484313964844,
+      "psnr_foreground": 22.016019821166992
+    },
+    {
+      "subject": "0504",
+      "psnr_all": 23.19868278503418,
+      "psnr_unseen": 22.792755126953125,
+      "psnr_foreground": 19.647275924682617
+    },
+    {
+      "subject": "0505",
+      "psnr_all": 25.051456451416016,
+      "psnr_unseen": 24.742830276489258,
+      "psnr_foreground": 19.639301300048828
+    },
+    {
+      "subject": "0506",
+      "psnr_all": 24.009763717651367,
+      "psnr_unseen": 23.675251007080078,
+      "psnr_foreground": 21.474477767944336
+    },
+    {
+      "subject": "0507",
+      "psnr_all": 26.912700653076172,
+      "psnr_unseen": 26.894180297851562,
+      "psnr_foreground": 19.5816650390625
+    },
+    {
+      "subject": "0508",
+      "psnr_all": 24.425884246826172,
+      "psnr_unseen": 24.224740982055664,
+      "psnr_foreground": 21.032733917236328
+    },
+    {
+      "subject": "0509",
+      "psnr_all": 25.34857749938965,
+      "psnr_unseen": 25.35259437561035,
+      "psnr_foreground": 17.293020248413086
+    },
+    {
+      "subject": "0510",
+      "psnr_all": 26.394432067871094,
+      "psnr_unseen": 26.084043502807617,
+      "psnr_foreground": 20.6588191986084
+    },
+    {
+      "subject": "0511",
+      "psnr_all": 25.113296508789062,
+      "psnr_unseen": 24.961585998535156,
+      "psnr_foreground": 20.406982421875
+    },
+    {
+      "subject": "0512",
+      "psnr_all": 24.74393081665039,
+      "psnr_unseen": 24.60272979736328,
+      "psnr_foreground": 20.100685119628906
+    },
+    {
+      "subject": "0513",
+      "psnr_all": 24.925392150878906,
+      "psnr_unseen": 24.7353458404541,
+      "psnr_foreground": 22.211048126220703
+    },
+    {
+      "subject": "0514",
+      "psnr_all": 24.562652587890625,
+      "psnr_unseen": 24.493621826171875,
+      "psnr_foreground": 21.354694366455078
+    },
+    {
+      "subject": "0515",
+      "psnr_all": 26.281803131103516,
+      "psnr_unseen": 26.050207138061523,
+      "psnr_foreground": 20.101215362548828
+    },
+    {
+      "subject": "0516",
+      "psnr_all": 26.181575775146484,
+      "psnr_unseen": 25.960460662841797,
+      "psnr_foreground": 19.23940086364746
+    },
+    {
+      "subject": "0517",
+      "psnr_all": 25.134666442871094,
+      "psnr_unseen": 24.93985939025879,
+      "psnr_foreground": 22.537738800048828
+    },
+    {
+      "subject": "0518",
+      "psnr_all": 24.235912322998047,
+      "psnr_unseen": 24.023466110229492,
+      "psnr_foreground": 21.203590393066406
+    },
+    {
+      "subject": "0519",
+      "psnr_all": 26.797306060791016,
+      "psnr_unseen": 26.516618728637695,
+      "psnr_foreground": 20.53020668029785
+    },
+    {
+      "subject": "0520",
+      "psnr_all": 25.73485565185547,
+      "psnr_unseen": 25.611957550048828,
+      "psnr_foreground": 22.216205596923828
+    },
+    {
+      "subject": "0521",
+      "psnr_all": 23.585969924926758,
+      "psnr_unseen": 23.250150680541992,
+      "psnr_foreground": 20.02492904663086
+    },
+    {
+      "subject": "0522",
+      "psnr_all": 26.531713485717773,
+      "psnr_unseen": 26.497295379638672,
+      "psnr_foreground": 21.314123153686523
+    },
+    {
+      "subject": "0523",
+      "psnr_all": 23.123456954956055,
+      "psnr_unseen": 22.869585037231445,
+      "psnr_foreground": 20.899648666381836
+    },
+    {
+      "subject": "0524",
+      "psnr_all": 23.086326599121094,
+      "psnr_unseen": 22.95943260192871,
+      "psnr_foreground": 19.97821044921875
+    },
+    {
+      "subject": "0525",
+      "psnr_all": 24.19603729248047,
+      "psnr_unseen": 23.965274810791016,
+      "psnr_foreground": 19.318355560302734
+    }
+  ],
+  "full_candidate_pool_comparison": {
+    "subjects": 26,
+    "scope": "All processed candidates, not only gallery selections",
+    "metrics": {
+      "psnr_all": {
+        "baseline": 25.019428693331204,
+        "ours": 30.519656914931076,
+        "gap": 5.500228221599873
+      },
+      "psnr_unseen": {
+        "baseline": 24.851452827453613,
+        "ours": 29.48901235140287,
+        "gap": 4.637559523949257
+      },
+      "psnr_foreground": {
+        "baseline": 20.60962941096379,
+        "ours": 22.111680324261005,
+        "gap": 1.5020509132972144
+      }
+    }
+  },
+  "baseline": "LGM initialization before adaptation",
+  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37"
 }

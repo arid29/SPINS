@@ -140,5 +140,55 @@
     "posed_00178_29.zip": "8a44d132c7ed0c5d1582449132327a285d4777756c609edec9209f082f769b01",
     "classic_samples.zip": "42757bb8baef3ee31eb95cb0ade5ac93feaecb2d5b456628df57dc6a85ce4d1f"
   },
-  "materials": "Original OBJ UVs assigned to original diffuse/basecolor maps via a local MTL; supplied FBX, normal, specular maps not used"
+  "materials": "Original OBJ UVs assigned to original diffuse/basecolor maps via a local MTL; supplied FBX, normal, specular maps not used",
+  "labels": false,
+  "baseline_candidate_metrics": [
+    {
+      "subject": "0500",
+      "psnr_all": 26.31930160522461,
+      "psnr_unseen": 25.957164764404297,
+      "psnr_foreground": 21.204784393310547
+    },
+    {
+      "subject": "0501",
+      "psnr_all": 24.426864624023438,
+      "psnr_unseen": 23.998144149780273,
+      "psnr_foreground": 21.286298751831055
+    },
+    {
+      "subject": "0502",
+      "psnr_all": 26.225717544555664,
+      "psnr_unseen": 26.333881378173828,
+      "psnr_foreground": 20.787107467651367
+    },
+    {
+      "subject": "0503",
+      "psnr_all": 22.592979431152344,
+      "psnr_unseen": 22.531803131103516,
+      "psnr_foreground": 18.569042205810547
+    }
+  ],
+  "full_candidate_pool_comparison": {
+    "subjects": 4,
+    "scope": "All processed candidates, not only gallery selections",
+    "metrics": {
+      "psnr_all": {
+        "baseline": 24.891215801239014,
+        "ours": 29.139649391174316,
+        "gap": 4.248433589935303
+      },
+      "psnr_unseen": {
+        "baseline": 24.70524835586548,
+        "ours": 28.014485359191895,
+        "gap": 3.309237003326416
+      },
+      "psnr_foreground": {
+        "baseline": 20.46180820465088,
+        "ours": 20.766411304473877,
+        "gap": 0.30460309982299805
+      }
+    }
+  },
+  "baseline": "LGM initialization before adaptation",
+  "baseline_sha256": "605c6632d5f53c8eecd9e7f02b08363dc2107486437af4de8389a8be4286ee37"
 }
