@@ -61,7 +61,7 @@ def main():
     parser.add_argument('--subjects', nargs='+', default=['0515', '0516', '0518', '0513', '0521', '0512'])
     parser.add_argument('--output', default='assets/results')
     parser.add_argument('--ours-description', default='four-view cycle-adapted model')
-    parser.add_argument('--resolution', type=int, default=384)
+    parser.add_argument('--resolution', type=int, default=256)
     parser.add_argument('--step-degrees', type=int, default=5)
     args = parser.parse_args()
     if args.step_degrees <= 0 or 360 % args.step_degrees or args.resolution < 64:
@@ -80,12 +80,11 @@ def main():
     baseline = render_checkpoint(args.baseline_checkpoint, opt, dataset, angles)
     ours = render_checkpoint(args.ours_checkpoint, opt, dataset, angles)
     try:
-        font = ImageFont.truetype('DejaVuSans.ttf', 19)
-        small = ImageFont.truetype('DejaVuSans.ttf', 14)
+        font = ImageFont.truetype('DejaVuSans.ttf', 16)
     except OSError:
-        font = small = ImageFont.load_default()
+        font = ImageFont.load_default()
     size = args.resolution
-    width, height = size * 2 + 36, size + 78
+    width, height = size * 2 + 36, size + 56
     for subject in dataset.items:
         frames = []
         for left, right in zip(baseline[subject], ours[subject]):
@@ -93,11 +92,9 @@ def main():
             canvas.paste(left, (12, 44))
             canvas.paste(right, (size + 24, 44))
             draw = ImageDraw.Draw(canvas)
-            draw.text((size / 2 + 12, 22), 'Baseline (LGM initialization)', font=font, anchor='mm', fill='#374151')
+            draw.text((size / 2 + 12, 22), 'Baseline', font=font, anchor='mm', fill='#374151')
             draw.text((size * 1.5 + 24, 22), 'OURS', font=font, anchor='mm', fill='#176752')
             draw.line((size + 18, 44, size + 18, size + 44), fill='#e5e7eb')
-            draw.text((width / 2, height - 14), f'Subject {subject}',
-                      font=small, anchor='mm', fill='#6b7280')
             frames.append(canvas)
         # One palette per GIF reduces flicker and treats both methods equally.
         sample = Image.new('RGB', (width, height * 12), 'white')

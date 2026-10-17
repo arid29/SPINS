@@ -22,32 +22,28 @@ The current code adapts [LGM](https://github.com/3DTopia/LGM) for four-view cycl
 
 ## Qualitative results
 
-**Baseline** is the LGM initialization before adaptation; **OURS** is the progressive cycle-consistency model at epoch 57. These selected held-out examples show the reconstruction stage using the same four real, calibrated input views for both methods. They are not end-to-end single-image diffusion results.
-
-The gallery shows selected strong all-view PSNR results for OURS among held-out subjects 0505–0525. Each synchronized turntable renders the same cameras for both methods. Both sides use identical framing and resolution, and each frame is a direct model render.
-
 <p align="center">
-  <img src="assets/results/comparison_0515.gif" alt="Subject 0515: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0515.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0516.gif" alt="Subject 0516: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0516.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0518.gif" alt="Subject 0518: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0518.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0513.gif" alt="Subject 0513: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0513.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0521.gif" alt="Subject 0521: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0521.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0512.gif" alt="Subject 0512: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0512.gif" alt="Baseline and OURS synchronized novel-view comparison" width="548" />
 </p>
 
 ## Install
@@ -170,17 +166,6 @@ python scripts/prepare_weights.py --lgm-checkpoint /path/to/model.safetensors
 
 The resulting local files are `pretrained/model.safetensors`, `pretrained/vgg16_features.pth`, and `pretrained/lpips_vgg.pth`. Existing files are kept. Checkpoints are ignored by Git. Public initialization and this approximate preprocessing are not guaranteed to reproduce results obtained with a different initialization or rendering pipeline.
 
-## Run the GPU smoke test
-
-```bash
-bash scripts/run.sh smoke \
-  --data-root THumanDataset/thuman2_rendered_lgm \
-  --checkpoint pretrained/model.safetensors \
-  --workspace workspace_smoke
-```
-
-The test checks all 526 subjects' camera matrices, orbit invariants, schedule boundaries, renderer/ray agreement at known poses, absence of intermediate-view GT in the loss, and finite nonzero gradients at ±5°, 10°, 30°, 60°, and 90°. It saves a report and image grids in the workspace. Those six optimization steps are only a diagnostic; their weights are not used for training.
-
 ## Train
 
 Fixed-offset baseline (30 epochs):
@@ -224,19 +209,6 @@ bash scripts/run.sh evaluate \
 ```
 
 This performs inference on subjects 0500–0525, saves RGB comparisons and cycle grids, and writes per-subject and aggregate metrics. It requires four calibrated input views; this entry point is not a single-image generation tool. Direct grids show GT above predictions for views 00–11. Cycle grids show the original four views, the four intermediate renders, then the returned four views.
-
-## Optional cluster/container use
-
-The wrappers do not contain machine-specific paths. An existing compatible container can be used via `SPINS_CONTAINER=/absolute/path/to/container.sif` and `SPINS_PYTHON=/absolute/path/to/python`. Set `SPINS_CONTAINER_RUNTIME=apptainer` if needed; otherwise it uses Singularity. Host and data paths must be visible inside the container.
-
-Example Slurm submission (adapt resources/partition to your cluster):
-
-```bash
-mkdir -p workspace_progressive
-sbatch --partition=gpu --gres=gpu:1 --ntasks=1 --cpus-per-task=8 \
-  --mem=96G --time=08:00:00 --output=workspace_progressive/run.log \
-  scripts/run.sh progressive --workspace workspace_progressive --epochs 60
-```
 
 ## Acknowledgments and licensing
 

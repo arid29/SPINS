@@ -10,7 +10,7 @@
   "frames": 72,
   "step_degrees": 5,
   "frame_duration_ms": 100,
-  "render_resolution": 384,
+  "render_resolution": 256,
   "source_views": [
     0,
     3,
