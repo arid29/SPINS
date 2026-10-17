@@ -58,7 +58,7 @@ def main():
     parser.add_argument('--baseline-checkpoint', required=True)
     parser.add_argument('--ours-checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
-    parser.add_argument('--subjects', nargs='+', default=['0515', '0502', '0505'])
+    parser.add_argument('--subjects', nargs='+', default=['0515', '0516', '0518', '0513', '0514', '0505'])
     parser.add_argument('--output', default='assets/results')
     parser.add_argument('--ours-description', default='four-view cycle-adapted model')
     parser.add_argument('--resolution', type=int, default=384)
@@ -88,7 +88,7 @@ def main():
     width, height = size * 2 + 36, size + 78
     for subject in dataset.items:
         frames = []
-        for angle, left, right in zip(angles, baseline[subject], ours[subject]):
+        for left, right in zip(baseline[subject], ours[subject]):
             canvas = Image.new('RGB', (width, height), 'white')
             canvas.paste(left, (12, 44))
             canvas.paste(right, (size + 24, 44))
@@ -96,7 +96,7 @@ def main():
             draw.text((size / 2 + 12, 22), 'Baseline (LGM initialization)', font=font, anchor='mm', fill='#374151')
             draw.text((size * 1.5 + 24, 22), 'OURS', font=font, anchor='mm', fill='#176752')
             draw.line((size + 18, 44, size + 18, size + 44), fill='#e5e7eb')
-            draw.text((width / 2, height - 14), f'Subject {subject}  |  view {angle:03d} degrees',
+            draw.text((width / 2, height - 14), f'Subject {subject}',
                       font=small, anchor='mm', fill='#6b7280')
             frames.append(canvas)
         # One palette per GIF reduces flicker and treats both methods equally.

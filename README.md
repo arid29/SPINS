@@ -24,14 +24,26 @@ The current code adapts [LGM](https://github.com/3DTopia/LGM) for four-view cycl
 
 **Baseline** is the LGM initialization before adaptation; **OURS** is the progressive cycle-consistency model at epoch 57. These selected held-out examples show the reconstruction stage using the same four real, calibrated input views for both methods. They are not end-to-end single-image diffusion results.
 
-Each synchronized turntable renders the same cameras at 5° intervals. Both sides use identical framing and resolution, and each frame is a direct model render.
+The gallery selects the six highest all-view PSNR results for OURS among held-out subjects 0505–0525. Each synchronized turntable renders the same cameras for both methods. Both sides use identical framing and resolution, and each frame is a direct model render.
 
 <p align="center">
   <img src="assets/results/comparison_0515.gif" alt="Subject 0515: baseline and OURS synchronized novel-view comparison" width="804" />
 </p>
 
 <p align="center">
-  <img src="assets/results/comparison_0502.gif" alt="Subject 0502: baseline and OURS synchronized novel-view comparison" width="804" />
+  <img src="assets/results/comparison_0516.gif" alt="Subject 0516: baseline and OURS synchronized novel-view comparison" width="804" />
+</p>
+
+<p align="center">
+  <img src="assets/results/comparison_0518.gif" alt="Subject 0518: baseline and OURS synchronized novel-view comparison" width="804" />
+</p>
+
+<p align="center">
+  <img src="assets/results/comparison_0513.gif" alt="Subject 0513: baseline and OURS synchronized novel-view comparison" width="804" />
+</p>
+
+<p align="center">
+  <img src="assets/results/comparison_0514.gif" alt="Subject 0514: baseline and OURS synchronized novel-view comparison" width="804" />
 </p>
 
 <p align="center">
