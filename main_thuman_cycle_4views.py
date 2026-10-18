@@ -1,12 +1,5 @@
-"""Bounded four-view cycle-only diagnostic, leaving the one-view code untouched.
-
-Example (inside the lgm container environment):
-  python main_thuman_cycle_4views.py --workspace workspace_cycle4_trial --steps 50
-
-Four real views (00,03,06,09) -> detached renders at four other cameras ->
-four-view LGM -> reconstruct the original four views. Only this return render
-has a training loss (RGB MSE + alpha MSE + optional LPIPS). Other GT views are
-used only for evaluation. This small-subset trial is not a full training run.
+"""
+This small-subset trial is not a full training run.
 """
 
 import argparse
