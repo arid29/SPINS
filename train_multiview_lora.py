@@ -119,7 +119,7 @@ def main():
     parser.add_argument('--workspace', default='workspace_multiview_lora')
     parser.add_argument('--steps', type=int, default=3000)
     parser.add_argument('--size', type=int, default=768)
-    parser.add_argument('--rank', type=int, default=16)
+    parser.add_argument('--rank', type=int, default=32)
     parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--accumulation', type=int, default=4)
     parser.add_argument('--occlusion-prob', type=float, default=.5)

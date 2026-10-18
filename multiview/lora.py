@@ -7,7 +7,7 @@ from safetensors.torch import load_file, save_file
 
 
 class LoRALinear(nn.Module):
-    def __init__(self, base, rank=16, alpha=16):
+    def __init__(self, base, rank=32, alpha=32):
         super().__init__()
         self.base = base.requires_grad_(False)
         self.scale = alpha / rank
@@ -28,7 +28,7 @@ class LoRALinear(nn.Module):
         return self.base(x) + residual * self.scale
 
 
-def inject_lora(unet, rank=16):
+def inject_lora(unet, rank=32):
     unet.requires_grad_(False)
     names = []
     for name, layer in list(unet.named_modules()):
