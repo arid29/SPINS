@@ -30,7 +30,7 @@ These results show that single-image human 3DGS can be learned without dense mul
 <details>
 <summary>Implementation note</summary>
 
-**Approximate implementation. Paper-specific code and checkpoints are coming soon.** This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet.
+**This is an approximate implementation of the paper. Paper-specific code and checkpoints are coming soon. This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet.**
 
 </details>
 
