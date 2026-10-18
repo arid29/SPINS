@@ -164,6 +164,18 @@ Each of the 12 views can condition three targets at offsets `+3, +6, +9` modulo 
 
 Checkpoints and clean/occluded previews are saved every 500 steps. Resume with `--resume workspace_multiview_lora/step_001000` and the original training arguments. For your own preframed square image, replace the inference data arguments with `--image input.png`; it should match the training framing. Outputs contain the input and three generated views. Dataset inference also saves cameras and a target comparison.
 
+For a longer 512×512 continuation on three GPUs:
+
+```bash
+.venv-mvadapter/bin/python -m torch.distributed.run --standalone --nproc_per_node=3 \
+  train_multiview_lora.py --data-root /path/to/thuman2_rendered_lgm \
+  --workspace workspace_multiview_lora_512 --size 512 --rank 32 \
+  --steps 12000 --accumulation 2 \
+  --init-adapter workspace_multiview_lora/step_003000
+```
+
+`--init-adapter` starts a new optimizer from saved LoRA weights and permits a resolution change. Each GPU processes different view groups; the effective batch is GPU count × accumulation. To resume this run, replace `--init-adapter` with `--resume` pointing to its checkpoint and keep the same GPU count and training settings. Inference uses the checkpoint resolution unless overridden with `--size`.
+
 ## Acknowledgments
 
 Built on [LGM](https://github.com/3DTopia/LGM). Data: [THuman2.0](https://github.com/ytrock/THuman2.0-Dataset), [Renderpeople](https://renderpeople.com/free-3d-people/), and [HuMMan](https://huggingface.co/datasets/caizhongang/HuMMan). Renderpeople and HuMMan examples use the existing checkpoints for external inference only. See [THIRD_PARTY.md](THIRD_PARTY.md) and [LICENSE](LICENSE) for dependencies and licensing.

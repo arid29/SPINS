@@ -25,13 +25,15 @@ def main():
     parser.add_argument('--source', type=int, default=2)
     parser.add_argument('--image', help='Preframed square RGB image; alpha is composited onto white')
     parser.add_argument('--output', required=True)
-    parser.add_argument('--size', type=int, default=768)
+    parser.add_argument('--size', type=int, help='Override checkpoint resolution (default: checkpoint size or 768)')
     parser.add_argument('--occluded', action='store_true')
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--steps', type=int, default=30)
     args = parser.parse_args()
     config = json.loads((Path(args.adapter) / 'config.json').read_text()) if args.adapter else {}
-    size = config.get('size', args.size)
+    size = args.size if args.size is not None else config.get('size', 768)
+    if size < 64 or size % 64:
+        parser.error('--size must be a positive multiple of 64')
     out = Path(args.output)
     out.mkdir(parents=True, exist_ok=True)
     if args.image:

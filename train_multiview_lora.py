@@ -17,6 +17,7 @@ from PIL import Image
 from multiview.data import THumanMultiview
 from multiview.lora import inject_lora, load_lora, save_lora
 from multiview.model import build_pipeline, prompt_embeddings, generate, UPSTREAM_REVISION
+from multiview.distributed import initialize, barrier, average_gradients, mean_values, gather_rng
 
 
 def save_grid(sample, path, predictions=None):
@@ -34,13 +35,18 @@ def save_grid(sample, path, predictions=None):
 
 def save_training(pipe, optimizer, args, step, consumed, workspace):
     folder = workspace / f'step_{step:06d}'
+    rng_by_rank = gather_rng()
+    if int(os.environ.get('RANK', '0')) != 0:
+        barrier()
+        return folder
     folder.mkdir(exist_ok=True)
     save_lora(pipe.unet, folder / 'adapter.safetensors')
     torch.save({'optimizer': optimizer.state_dict(), 'step': step, 'consumed': consumed,
-                'rng': torch.get_rng_state(), 'cuda_rng': torch.cuda.get_rng_state(),
+                'rng_by_rank': rng_by_rank, 'world_size': len(rng_by_rank),
                 'config': vars(args)}, folder / 'training.pt')
     (folder / 'config.json').write_text(json.dumps(vars(args), indent=2) + '\n')
     (workspace / 'latest.txt').write_text(str(folder.resolve()) + '\n')
+    barrier()
     return folder
 
 
@@ -129,11 +135,15 @@ def main():
     parser.add_argument('--preview-steps', type=int, default=30)
     parser.add_argument('--train-subjects', type=int, nargs='+', help='Optional training subset for short checks')
     parser.add_argument('--resume', help='Path to a step directory')
+    parser.add_argument('--init-adapter', help='Warm-start weights from a step directory; permits a new resolution')
     parser.add_argument('--check-only', action='store_true', help='Validate cameras and preview data without a GPU')
     args = parser.parse_args()
+    if args.resume and args.init_adapter:
+        parser.error('--resume and --init-adapter are mutually exclusive')
     if args.size < 64 or args.size % 64 or min(args.steps, args.accumulation, args.rank, args.save_every, args.preview_steps) < 1 or args.preview_every < 0:
         parser.error('size must be a positive multiple of 64; step counts, rank, and accumulation must be positive')
     workspace = Path(args.workspace).resolve()
+    process_rank = int(os.environ.get('RANK', '0'))
     workspace.mkdir(parents=True, exist_ok=True)
     if (workspace / 'config.json').exists() and not args.resume and not args.check_only:
         raise FileExistsError('Use a new workspace or --resume')
@@ -143,25 +153,35 @@ def main():
     dataset = THumanMultiview(args.data_root, size=args.size, occlusion_prob=args.occlusion_prob,
                              seed=args.seed, subjects=args.train_subjects)
     from multiview.validate import validate_dataset
-    report = validate_dataset(dataset)
-    (workspace / 'data_checks.json').write_text(json.dumps(report, indent=2) + '\n')
-    for i in (0, 2, 11):
-        save_grid(dataset[i], workspace / f'data_source_{i:02d}.png')
-    print(json.dumps(report), flush=True)
+    if process_rank == 0:
+        report = validate_dataset(dataset)
+        (workspace / 'data_checks.json').write_text(json.dumps(report, indent=2) + '\n')
+        for i in (0, 2, 11):
+            save_grid(dataset[i], workspace / f'data_source_{i:02d}.png')
+        print(json.dumps(report), flush=True)
     if args.check_only:
         return
     if not torch.cuda.is_available():
         raise RuntimeError('CUDA GPU required for training')
-    device = 'cuda'
-    pipe = build_pipeline()
+    process_rank, world_size, device = initialize()
+    barrier()
+    pipe = build_pipeline(device=device)
     embeds = prompt_embeddings(pipe)
     names = inject_lora(pipe.unet, args.rank)
+    if args.init_adapter:
+        folder = Path(args.init_adapter)
+        if json.loads((folder / 'config.json').read_text())['rank'] != args.rank:
+            raise ValueError('Warm-start adapter rank differs')
+        load_lora(pipe.unet, folder / 'adapter.safetensors')
+    # Initialize identical weights, then use independent diffusion noise per GPU.
+    torch.manual_seed(args.seed + process_rank)
     pipe.unet.enable_gradient_checkpointing()
     pipe.unet.train()
     params = [p for p in pipe.unet.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(params, lr=args.lr, weight_decay=.01)
     config = {**vars(args), 'train_subjects_count': len(dataset.subjects), 'examples_per_epoch': len(dataset),
               'trainable_parameters': sum(p.numel() for p in params), 'lora_layers': names,
+              'world_size': world_size, 'effective_batch_size': world_size * args.accumulation,
               'upstream_revision': UPSTREAM_REVISION, 'gpu': torch.cuda.get_device_name(),
               'targets': '(source + [3,6,9]) % 12', 'camera_condition': 'native direction-position, source relative',
               'projection': 'fixed calibrated THuman perspective', 'occlusion_foreground_fraction': [.1, .35]}
@@ -169,20 +189,25 @@ def main():
     if args.resume:
         folder = Path(args.resume)
         state = torch.load(folder / 'training.pt', map_location='cpu', weights_only=False)
+        if state.get('world_size', 1) != world_size:
+            raise ValueError('Resume requires the original GPU count; use --init-adapter for a new run')
         for key in ('size', 'rank', 'lr', 'accumulation', 'occlusion_prob', 'seed', 'data_root', 'train_subjects'):
             if state['config'][key] != vars(args)[key]:
                 raise ValueError(f'Resume config differs: {key}')
         load_lora(pipe.unet, folder / 'adapter.safetensors')
         optimizer.load_state_dict(state['optimizer'])
-        torch.set_rng_state(state['rng'])
-        torch.cuda.set_rng_state(state['cuda_rng'])
+        rng = state['rng_by_rank'][process_rank] if 'rng_by_rank' in state else state
+        torch.set_rng_state(rng['rng'])
+        torch.cuda.set_rng_state(rng['cuda_rng'])
         start_step, consumed = state['step'], state['consumed']
-    (workspace / 'config.json').write_text(json.dumps(config, indent=2) + '\n')
+    if process_rank == 0:
+        (workspace / 'config.json').write_text(json.dumps(config, indent=2) + '\n')
     eval_clean = THumanMultiview(args.data_root, split='eval', size=args.size, occlusion_prob=0, subjects=[500])
     eval_occluded = THumanMultiview(args.data_root, split='eval', size=args.size, occlusion_prob=1, subjects=[500])
     previews = [('clean', eval_clean), ('occluded', eval_occluded)]
-    if not args.resume:
+    if not args.resume and process_rank == 0:
         preview(pipe, embeds, previews, args, workspace, 0)
+    barrier()
     order, epoch_cached = None, -1
     last_folder = None
     optimizer.zero_grad(set_to_none=True)
@@ -192,7 +217,7 @@ def main():
         for group in optimizer.param_groups:
             group['lr'] = args.lr * warmup
         for micro in range(args.accumulation):
-            epoch, offset = divmod(consumed, len(dataset))
+            epoch, offset = divmod(consumed + process_rank, len(dataset))
             if epoch != epoch_cached:
                 dataset.epoch = epoch
                 order = np.random.default_rng(args.seed + epoch).permutation(len(dataset))
@@ -208,7 +233,8 @@ def main():
             (loss / args.accumulation).backward()
             loss_sum += loss.detach().item() / args.accumulation
             occ_sum += sample['occlusion_fraction'] / args.accumulation
-            consumed += 1
+            consumed += world_size
+        average_gradients(params)
         grad_norm = torch.nn.utils.clip_grad_norm_(params, 1.)
         if not torch.isfinite(grad_norm) or grad_norm == 0:
             raise FloatingPointError(f'Invalid LoRA gradients: {grad_norm}')
@@ -216,21 +242,29 @@ def main():
             raise RuntimeError('Frozen base received gradients')
         optimizer.step()
         optimizer.zero_grad(set_to_none=True)
-        log = {'step': step, 'examples_seen': consumed, 'loss': loss_sum,
-               'grad_norm': grad_norm.item(), 'occlusion_fraction': occ_sum,
+        loss_mean, occ_mean = mean_values([loss_sum, occ_sum], device)
+        log = {'step': step, 'examples_seen': consumed, 'loss': loss_mean,
+               'grad_norm': grad_norm.item(), 'occlusion_fraction': occ_mean,
                'seconds': time.monotonic() - started,
                'peak_gpu_gb': torch.cuda.max_memory_allocated() / 2**30}
-        with (workspace / 'train.jsonl').open('a') as f:
-            f.write(json.dumps(log) + '\n')
-        print(json.dumps(log), flush=True)
+        if process_rank == 0:
+            with (workspace / 'train.jsonl').open('a') as f:
+                f.write(json.dumps(log) + '\n')
+            print(json.dumps(log), flush=True)
         if step % args.save_every == 0 or step == args.steps:
             last_folder = save_training(pipe, optimizer, args, step, consumed, workspace)
         if (args.preview_every and step % args.preview_every == 0) or step == args.steps:
-            preview(pipe, embeds, previews, args, workspace, step)
+            if process_rank == 0:
+                preview(pipe, embeds, previews, args, workspace, step)
+            barrier()
     # Strictly reload the saved adapter to verify the exported parameter set.
     if last_folder:
         load_lora(pipe.unet, last_folder / 'adapter.safetensors')
-    print('TRAINING_COMPLETE', flush=True)
+    barrier()
+    if process_rank == 0:
+        print('TRAINING_COMPLETE', flush=True)
+    if torch.distributed.is_initialized():
+        torch.distributed.destroy_process_group()
 
 
 if __name__ == '__main__':
