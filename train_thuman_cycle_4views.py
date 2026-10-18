@@ -1,8 +1,4 @@
-"""Long four-view cycle-only training: IDs 0000..0499 train, 0500..0525 eval.
 
-Run from the LGM directory inside the lgm container environment. The independent
-50-step diagnostic and the historical single-view scripts remain unchanged.
-"""
 
 import argparse
 import copy
