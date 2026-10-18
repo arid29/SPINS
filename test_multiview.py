@@ -39,12 +39,15 @@ class MultiviewTests(unittest.TestCase):
         image = np.ones((128, 128, 3), dtype=np.float32)
         mask = np.zeros((128, 128), dtype=np.float32)
         mask[12:116, 45:83] = 1
+        image[mask > 0] = .25
+        original = image.copy()
         for seed in range(50):
             modified, occ, fraction = occlude(image, mask, np.random.default_rng(seed))
             self.assertGreaterEqual(fraction, .1)
             self.assertLessEqual(fraction, .35)
             np.testing.assert_array_equal(modified[~occ], image[~occ])
-            np.testing.assert_array_equal(image, 1.)
+            np.testing.assert_array_equal(image, original)
+            np.testing.assert_array_equal(modified[occ], 1.)
             self.assertGreater(np.abs(modified - image).sum(), 0)
 
     def test_lora_zero_initialization_gradients_and_round_trip(self):

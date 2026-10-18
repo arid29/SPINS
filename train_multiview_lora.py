@@ -184,7 +184,8 @@ def main():
               'world_size': world_size, 'effective_batch_size': world_size * args.accumulation,
               'upstream_revision': UPSTREAM_REVISION, 'gpu': torch.cuda.get_device_name(),
               'targets': '(source + [3,6,9]) % 12', 'camera_condition': 'native direction-position, source relative',
-              'projection': 'fixed calibrated THuman perspective', 'occlusion_foreground_fraction': [.1, .35]}
+              'projection': 'fixed calibrated THuman perspective', 'occlusion_foreground_fraction': [.1, .35],
+              'occlusion_style': 'irregular_white_patch'}
     start_step, consumed = 0, 0
     if args.resume:
         folder = Path(args.resume)

@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from PIL import Image, ImageDraw
+from PIL import Image
 from torch.utils.data import Dataset
 
 
@@ -48,44 +48,36 @@ def camera_condition(poses, size):
 
 
 def occlude(image, foreground, rng, min_fraction=.10, max_fraction=.35):
-    """Occlude a measured fraction of foreground, without changing framing."""
+    """Erase an irregular, randomly oriented patch to the white background."""
     ys, xs = np.where(foreground > .5)
     if len(xs) == 0:
         raise ValueError('Empty foreground mask')
     h, w = foreground.shape
     total = len(xs)
     bbox_w, bbox_h = xs.max() - xs.min() + 1, ys.max() - ys.min() + 1
-    for _ in range(100):
-        center = int(rng.integers(total))
-        rw = max(2, int(bbox_w * rng.uniform(.3, 1.1)))
-        rh = max(2, int(bbox_h * rng.uniform(.12, .5)))
-        x, y = int(xs[center]), int(ys[center])
-        shape = Image.new('L', (w, h))
-        draw = ImageDraw.Draw(shape)
-        bounds = (x-rw//2, y-rh//2, x+rw//2, y+rh//2)
-        (draw.rectangle if rng.random() < .6 else draw.ellipse)(bounds, fill=255)
-        mask = np.asarray(shape) > 0
-        fraction = float((mask & (foreground > .5)).sum() / total)
-        if min_fraction <= fraction <= max_fraction:
-            output = image.copy()
-            if rng.random() < .5:
-                fill = rng.uniform(0, 1, (1, 1, 3))
-            else:
-                patch = (rng.random((8, 8, 3)) * 255).astype(np.uint8)
-                fill = np.asarray(Image.fromarray(patch).resize((w, h), Image.Resampling.BILINEAR)) / 255
-            output[mask] = np.broadcast_to(fill, image.shape)[mask]
-            return output, mask, fraction
-    # Deterministic fallback: a horizontal band covering a valid foreground count.
-    counts = (foreground > .5).sum(axis=1)
-    start = int(ys.min())
-    end = start + int(np.searchsorted(np.cumsum(counts[start:]), total * .2)) + 1
-    mask = np.zeros((h, w), dtype=bool)
-    mask[start:end] = True
+    center = int(rng.integers(total))
+    yy, xx = np.mgrid[:h, :w]
+    angle = rng.uniform(0, 2 * np.pi)
+    dx, dy = xx - xs[center], yy - ys[center]
+    u = (np.cos(angle) * dx + np.sin(angle) * dy) / (bbox_w * rng.uniform(.5, 1.3))
+    v = (-np.sin(angle) * dx + np.cos(angle) * dy) / (bbox_h * rng.uniform(.2, .6))
+    theta = np.arctan2(v, u)
+    edge = np.ones_like(theta)
+    for frequency in (3, 5, 7):
+        edge += rng.uniform(.08, .18) * np.sin(frequency * theta + rng.uniform(0, 2 * np.pi))
+    distance = np.hypot(u, v) / edge
+    # Set the patch size by actual foreground coverage, including thin limbs.
+    minimum, maximum = int(np.ceil(total * min_fraction)), int(np.floor(total * max_fraction))
+    if minimum < 1 or maximum < minimum or maximum > total:
+        raise ValueError('Invalid foreground occlusion bounds')
+    count = int(rng.integers(minimum, maximum + 1))
+    threshold = np.partition(distance[ys, xs], count - 1)[count - 1]
+    mask = distance <= threshold
     fraction = float((mask & (foreground > .5)).sum() / total)
     if not min_fraction <= fraction <= max_fraction:
         raise ValueError('Could not construct bounded foreground occlusion')
     output = image.copy()
-    output[mask] = rng.uniform(0, 1, 3)
+    output[mask] = 1.
     return output, mask, fraction
 
 

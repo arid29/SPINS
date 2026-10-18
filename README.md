@@ -160,7 +160,7 @@ bash scripts/setup_multiview.sh
   --subject 500 --source 2 --output workspace_multiview_result
 ```
 
-Each of the 12 views can condition three targets at offsets `+3, +6, +9` modulo 12: `02 → 05, 08, 11`. Training uses subjects 0000–0499; evaluation uses 0500–0525. The trainer adds rank-32 attention LoRAs to SDXL + MV-Adapter at its native 768-pixel resolution. Half the conditioning images receive synthetic occlusion covering 10–35% of the foreground; targets stay clean. Set `--occlusion-prob 0` to disable augmentation. The model adapts to the existing fixed perspective cameras and preserves the full image framing.
+Each of the 12 views can condition three targets at offsets `+3, +6, +9` modulo 12: `02 → 05, 08, 11`. Training uses subjects 0000–0499; evaluation uses 0500–0525. The trainer adds rank-32 attention LoRAs to SDXL + MV-Adapter at its native 768-pixel resolution. Half the conditioning images receive irregular white patches covering 10–35% of the foreground; targets stay clean. Set `--occlusion-prob 0` to disable augmentation. The model adapts to the existing fixed perspective cameras and preserves the full image framing.
 
 Checkpoints and clean/occluded previews are saved every 500 steps. Resume with `--resume workspace_multiview_lora/step_001000` and the original training arguments. For your own preframed square image, replace the inference data arguments with `--image input.png`; it should match the training framing. Outputs contain the input and three generated views. Dataset inference also saves cameras and a target comparison.
 
