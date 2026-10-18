@@ -27,10 +27,10 @@ These results show that single-image human 3DGS can be learned without dense mul
   <a href="assets/figures/SPINS_pipeline.pdf"><img src="assets/figures/SPINS_pipeline.png" alt="SPINS multiview generation and progressive perturb-and-reconstruct pipeline" width="900" /></a>
 </p>
 
-<!-- <details>
+<details>
 <summary>Implementation note</summary>
 
-**This is an approximate implementation of the paper. Paper-specific code and checkpoints will be made available in due time. This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet.** -->
+**This is an approximate implementation of the paper. Paper-specific code and checkpoints will be made available in due time. This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet.** 
 
 </details>
 
