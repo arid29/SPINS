@@ -1,5 +1,7 @@
 # Third-party code
 
+- `scripts/setup_multiview.sh` downloads [MV-Adapter](https://github.com/huanngzh/MV-Adapter) at revision `4277e0018232bac82bb2c103caf0893cedb711be`, under Apache-2.0. The LoRA trainer follows its image-conditioned denoising and reference-feature workflow. Upstream source and pretrained weights remain external dependencies. Model licenses are provided with [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0), [MV-Adapter](https://huggingface.co/huanngzh/mv-adapter), and the [VAE](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
+
 - `core/` contains adapted LGM components from [3DTopia/LGM](https://github.com/3DTopia/LGM), based on revision `fe8d12cff8c827df7bb77a3c8e8b37408cb6fe4c`. Its MIT notice is retained in the root `LICENSE`. The model, loader, local LPIPS weight loading, and camera schedule have been adapted for this approximate implementation.
 - `core/attention.py` retains the Meta copyright header from [DINOv2](https://github.com/facebookresearch/dinov2). The Apache 2.0 license is included in `licenses/DINOv2-LICENSE`.
 - `core/lpips.py` adapts the VGG perceptual-loss structure from [PerceptualSimilarity](https://github.com/richzhang/PerceptualSimilarity), loading weights from local files. Its upstream notice is included in `licenses/LPIPS-LICENSE`.

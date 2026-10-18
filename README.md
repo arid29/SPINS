@@ -30,7 +30,7 @@ These results show that single-image human 3DGS can be learned without dense mul
 <details>
 <summary>Implementation note</summary>
 
-This is an approximate implementation of the paper. Paper-specific code and checkpoints will be made available soon. This release covers LGM adaptation from four calibrated human views; the single-image diffusion stage is not included yet. 
+This is an approximate implementation of the paper. Paper-specific code and checkpoints will be made available soon. This release covers LGM adaptation from four calibrated human views and an experimental MV-Adapter LoRA trainer for single-image multiview generation.
 
 </details>
 
@@ -144,6 +144,28 @@ bash scripts/run.sh evaluate \
 
 Training uses four-view cycle consistency with RGB, mask, and LPIPS losses; the viewpoint-offset cap grows from 5° to 90°. Add `--resume` with the original training arguments to resume a completed epoch. Evaluation requires four calibrated views and saves comparison images and metrics.
 
+### Single-image multiview LoRA
+
+Install from the PyTorch environment above, then train:
+
+```bash
+bash scripts/setup_multiview.sh
+.venv-mvadapter/bin/python train_multiview_lora.py \
+  --data-root /path/to/thuman2_rendered_lgm \
+  --workspace workspace_multiview_lora --steps 3000
+
+.venv-mvadapter/bin/python infer_multiview.py \
+  --adapter workspace_multiview_lora/step_003000 \
+  --data-root /path/to/thuman2_rendered_lgm \
+  --subject 500 --source 2 --output workspace_multiview_result
+```
+
+Each of the 12 views can condition three targets at offsets `+3, +6, +9` modulo 12: `02 → 05, 08, 11`. Training uses subjects 0000–0499; evaluation uses 0500–0525. The trainer adds rank-16 attention LoRAs to SDXL + MV-Adapter at its native 768-pixel resolution. Half the conditioning images receive synthetic occlusion covering 10–35% of the foreground; targets stay clean. Set `--occlusion-prob 0` to disable augmentation. The model adapts to the existing fixed perspective cameras and preserves the full image framing.
+
+Checkpoints and clean/occluded previews are saved every 500 steps. Resume with `--resume workspace_multiview_lora/step_001000` and the original training arguments. For your own preframed square image, replace the inference data arguments with `--image input.png`; it should match the training framing. Outputs contain the input and three generated views. Dataset inference also saves cameras and a target comparison.
+
 ## Acknowledgments
 
 Built on [LGM](https://github.com/3DTopia/LGM). Data: [THuman2.0](https://github.com/ytrock/THuman2.0-Dataset), [Renderpeople](https://renderpeople.com/free-3d-people/), and [HuMMan](https://huggingface.co/datasets/caizhongang/HuMMan). Renderpeople and HuMMan examples use the existing checkpoints for external inference only. See [THIRD_PARTY.md](THIRD_PARTY.md) and [LICENSE](LICENSE) for dependencies and licensing.
+
+The multiview trainer uses [MV-Adapter](https://github.com/huanngzh/MV-Adapter), [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0), and the [SDXL VAE fix](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
