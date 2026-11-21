@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SPINS learns single-image human novel view synthesis with sparse 2D supervision. Explore the method and human 3D Gaussian reconstruction results.">
+  <meta name="theme-color" content="#634ab5">
+  <meta property="og:title" content="SPINS: Sparsely-Supervised Human Novel View Synthesis from a Single Image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arid29.github.io/SPINS/">
+  <meta property="og:image" content="https://arid29.github.io/SPINS/assets/figures/SPINS_teaser.png">
+  <link rel="canonical" href="https://arid29.github.io/SPINS/">
+  <link rel="icon" type="image/svg+xml" href="assets/site/favicon.svg">
+  <link rel="stylesheet" href="assets/site/style.css">
+  <script defer src="assets/site/site.js"></script>
+  <title>SPINS | Single-Image Human Novel View Synthesis</title>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="site-nav" aria-label="Page navigation"><div class="nav-inner">
+  <a class="wordmark" href="#top" aria-label="SPINS, top of page">SPINS</a>
+  <div class="nav-links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a></div>
+</div></nav>
+<main id="main">
+<header class="hero container" id="top">
+  <h1><span class="title-brand">SPINS</span><span class="title-text">Sparsely-Supervised Human Novel View Synthesis from a Single Image</span></h1>
+  <p class="subtitle">Learning human 3D Gaussian Splatting from sparse 2D views.</p>
+  <div class="resource-links">
+    <a class="pill" href="#method">Explore the method</a>
+    <a class="pill" href="#results">View results</a>
+    <button class="pill code-button" type="button" disabled aria-describedby="code-status">Code <span class="coming-soon" id="code-status">Coming soon</span></button>
+  </div>
+  <figure class="hero-figure">
+    <button class="figure-zoom" type="button" data-zoom aria-label="Enlarge the SPINS overview figure" disabled><img src="assets/figures/SPINS_teaser.png" width="2286" height="1182" fetchpriority="high" alt="SPINS overview comparing dense supervision with sparse human views and progressive viewpoint perturbation."></button>
+    <figcaption>Single-image human novel view synthesis with <strong>sparse 2D supervision</strong>.</figcaption>
+  </figure>
+</header>
+<section class="section abstract-section" id="abstract" aria-labelledby="abstract-title">
+  <div class="reading-width"><h2 id="abstract-title">Abstract</h2><p>Existing human novel view synthesis (NVS) methods typically rely on textured 3D scans, dense pose-aligned multiview images, or parametric body priors such as SMPL, making their training data costly to acquire and difficult to scale beyond controlled capture settings.
+We present <strong>SPINS</strong>, a framework for single-image human NVS that learns feed-forward human 3D Gaussian Splatting (3DGS) from sparse 2D view supervision.
+Given a single input image, a human-specific multiview diffusion module first synthesizes a small set of anatomically plausible canonical views.
+An object-centric 3DGS reconstruction model, initialized from large-scale pretraining, is then adapted with only sparse 2D human views to convert the synthesized views into a 3DGS representation.
+We introduce a sparsely supervised perturb-and-reconstruct objective: Gaussians predicted from the synthesized views are rendered at offset viewpoints, and the reconstruction obtained from those renderings must reproduce the original views.
+Geometric errors that are invisible from the supervised views become visible once the asset is rendered from elsewhere, and the round trip converts them into reconstruction error that the model is driven to correct.
+The objective, therefore, enforces stable geometry and appearance across viewpoints with nothing beyond the sparse 2D views as supervision.
+Trained once on four views per subject of a single dataset, SPINS remains competitive with densely supervised methods across three benchmarks despite using no dense multiview, textured-mesh, or SMPL supervision, and is markedly more resilient to partial occlusions of the input view.
+These results show that single-image human 3DGS can be learned without dense multiview capture, textured meshes, or explicit parametric body priors.</p></div>
+</section>
+<section class="section container" id="method" aria-labelledby="method-title">
+  <h2 id="method-title">Method overview</h2>
+  <p class="section-intro">Generate a small set of canonical views, reconstruct a 3D human, and learn from what changes when the viewpoint moves.</p>
+  <figure class="method-figure">
+    <button class="figure-zoom" type="button" data-zoom aria-label="Enlarge the SPINS method figure" disabled><img src="assets/figures/SPINS_pipeline.png" width="2115" height="996" loading="lazy" alt="SPINS pipeline: multiview diffusion, Gaussian reconstruction, offset rendering, and shared reconstruction supervised by the original sparse views."></button>
+    <figcaption>The perturb-and-reconstruct objective uses a shared reconstruction model across the round trip.</figcaption>
+  </figure>
+  <div class="reading-width method-copy">
+    <p><strong>From one image to 3D.</strong> A human-specific multiview diffusion module synthesizes anatomically plausible canonical views. A pretrained object-centric reconstruction model, adapted with sparse human views, converts them into a 3D Gaussian representation.</p>
+    <p><strong>Perturb and reconstruct.</strong> The predicted Gaussians are rendered from offset viewpoints and reconstructed again. The second reconstruction must reproduce the original views, exposing geometric errors that are difficult to observe from the supervised viewpoints alone.</p>
+    <p><strong>Progressive viewpoint offsets.</strong> Viewpoint perturbations grow during adaptation, gradually asking the model to maintain geometry and appearance across a wider range of viewpoints.</p>
+  </div>
+</section>
+<section class="section results-section" id="results" aria-labelledby="results-title"><div class="container">
+  <h2 id="results-title">Qualitative results</h2>
+  <p class="section-intro">Human reconstructions on THuman2.0 and zero-shot results on Renderpeople and HuMMan.</p>
+  <div class="results-controls"><button id="animation-toggle" class="motion-button" type="button" aria-pressed="false" hidden>Pause animations</button></div>
+<section class="dataset" aria-labelledby="thuman-title"><h3 id="thuman-title">THuman2.0</h3><p class="dataset-caption">Baseline and SPINS reconstructions, shown side by side.</p><div class="gallery comparison-grid">
+<figure class="result"><img src="assets/site/posters/comparison_0515.png" data-animation="assets/results/comparison_0515.gif" data-poster="assets/site/posters/comparison_0515.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 1"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0516.png" data-animation="assets/results/comparison_0516.gif" data-poster="assets/site/posters/comparison_0516.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 2"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0518.png" data-animation="assets/results/comparison_0518.gif" data-poster="assets/site/posters/comparison_0518.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 3"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0513.png" data-animation="assets/results/comparison_0513.gif" data-poster="assets/site/posters/comparison_0513.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 4"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0521.png" data-animation="assets/results/comparison_0521.gif" data-poster="assets/site/posters/comparison_0521.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 5"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0512.png" data-animation="assets/results/comparison_0512.gif" data-poster="assets/site/posters/comparison_0512.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 6"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0520.png" data-animation="assets/results/comparison_0520.gif" data-poster="assets/site/posters/comparison_0520.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 7"></figure>
+<figure class="result"><img src="assets/site/posters/comparison_0519.png" data-animation="assets/results/comparison_0519.gif" data-poster="assets/site/posters/comparison_0519.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 8"></figure>
+</div></section>
+<section class="dataset" aria-labelledby="renderpeople-title"><h3 id="renderpeople-title">Renderpeople</h3><p class="dataset-caption">Zero-shot reconstruction on rendered scans.</p><div class="gallery people-grid">
+<figure class="result"><img src="assets/site/posters/ours_renderpeople_01.png" data-animation="assets/results/ours_renderpeople_01.gif" data-poster="assets/site/posters/ours_renderpeople_01.png" width="280" height="280" loading="lazy" decoding="async" alt="Renderpeople reconstruction, example 1"></figure>
+<figure class="result"><img src="assets/site/posters/ours_renderpeople_02.png" data-animation="assets/results/ours_renderpeople_02.gif" data-poster="assets/site/posters/ours_renderpeople_02.png" width="280" height="280" loading="lazy" decoding="async" alt="Renderpeople reconstruction, example 2"></figure>
+<figure class="result"><img src="assets/site/posters/ours_renderpeople_03.png" data-animation="assets/results/ours_renderpeople_03.gif" data-poster="assets/site/posters/ours_renderpeople_03.png" width="280" height="280" loading="lazy" decoding="async" alt="Renderpeople reconstruction, example 3"></figure>
+</div></section>
+<section class="dataset" aria-labelledby="humman-title"><h3 id="humman-title">HuMMan</h3><p class="dataset-caption">Zero-shot reconstruction on rendered human scans.</p><div class="gallery people-grid">
+<figure class="result"><img src="assets/site/posters/ours_humman_01.png" data-animation="assets/results/ours_humman_01.gif" data-poster="assets/site/posters/ours_humman_01.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 1"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_02.png" data-animation="assets/results/ours_humman_02.gif" data-poster="assets/site/posters/ours_humman_02.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 2"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_03.png" data-animation="assets/results/ours_humman_03.gif" data-poster="assets/site/posters/ours_humman_03.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 3"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_04.png" data-animation="assets/results/ours_humman_04.gif" data-poster="assets/site/posters/ours_humman_04.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 4"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_05.png" data-animation="assets/results/ours_humman_05.gif" data-poster="assets/site/posters/ours_humman_05.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 5"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_06.png" data-animation="assets/results/ours_humman_06.gif" data-poster="assets/site/posters/ours_humman_06.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 6"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_07.png" data-animation="assets/results/ours_humman_07.gif" data-poster="assets/site/posters/ours_humman_07.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 7"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_08.png" data-animation="assets/results/ours_humman_08.gif" data-poster="assets/site/posters/ours_humman_08.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 8"></figure>
+<figure class="result"><img src="assets/site/posters/ours_humman_09.png" data-animation="assets/results/ours_humman_09.gif" data-poster="assets/site/posters/ours_humman_09.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 9"></figure>
+</div></section>
+</div></section>
+<aside class="release-note reading-width" aria-label="Implementation note"><strong>Approximate implementation.</strong> Paper-specific code and checkpoints are coming soon.</aside>
+</main>
+<footer><p>SPINS · Sparsely-Supervised Human Novel View Synthesis</p><p class="credit">Project-page layout inspired by <a href="https://inter-pose.github.io/">InterPose</a>.</p></footer>
+<dialog id="figure-dialog" aria-label="Expanded research figure"><button class="dialog-close" type="button" aria-label="Close expanded figure">Close</button><img id="expanded-figure" alt=""></dialog>
+</body>
+</html>
