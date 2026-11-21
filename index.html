@@ -26,9 +26,8 @@
   <h1><span class="title-brand">SPINS</span><span class="title-text">Sparsely-Supervised Human Novel View Synthesis from a Single Image</span></h1>
   <p class="subtitle">Learning human 3D Gaussian Splatting from sparse 2D views.</p>
   <div class="resource-links">
-    <a class="pill" href="#method">Explore the method</a>
-    <a class="pill" href="#results">View results</a>
-    <button class="pill code-button" type="button" disabled aria-describedby="code-status">Code <span class="coming-soon" id="code-status">Coming soon</span></button>
+    <a class="pill" href="https://github.com/arid29/SPINS">Code</a>
+    <a class="pill paper-link" href="#paper-status">Paper <span class="coming-soon">Coming soon</span></a>
   </div>
   <figure class="hero-figure">
     <button class="figure-zoom" type="button" data-zoom aria-label="Enlarge the SPINS overview figure" disabled><img src="assets/figures/SPINS_teaser.png" width="2286" height="1182" fetchpriority="high" alt="SPINS overview comparing dense supervision with sparse human views and progressive viewpoint perturbation."></button>
@@ -62,7 +61,6 @@ These results show that single-image human 3DGS can be learned without dense mul
 <section class="section results-section" id="results" aria-labelledby="results-title"><div class="container">
   <h2 id="results-title">Qualitative results</h2>
   <p class="section-intro">Human reconstructions on THuman2.0 and zero-shot results on Renderpeople and HuMMan.</p>
-  <div class="results-controls"><button id="animation-toggle" class="motion-button" type="button" aria-pressed="false" hidden>Pause animations</button></div>
 <section class="dataset" aria-labelledby="thuman-title"><h3 id="thuman-title">THuman2.0</h3><p class="dataset-caption">Baseline and SPINS reconstructions, shown side by side.</p><div class="gallery comparison-grid">
 <figure class="result"><img src="assets/site/posters/comparison_0515.png" data-animation="assets/results/comparison_0515.gif" data-poster="assets/site/posters/comparison_0515.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 1"></figure>
 <figure class="result"><img src="assets/site/posters/comparison_0516.png" data-animation="assets/results/comparison_0516.gif" data-poster="assets/site/posters/comparison_0516.png" width="548" height="312" loading="lazy" decoding="async" alt="THuman2.0 reconstruction, example 2"></figure>
@@ -90,6 +88,16 @@ These results show that single-image human 3DGS can be learned without dense mul
 <figure class="result"><img src="assets/site/posters/ours_humman_09.png" data-animation="assets/results/ours_humman_09.gif" data-poster="assets/site/posters/ours_humman_09.png" width="280" height="280" loading="lazy" decoding="async" alt="HuMMan reconstruction, example 9"></figure>
 </div></section>
 </div></section>
+<section class="section reading-width citation-section" id="citation" aria-labelledby="citation-title">
+  <h2 id="citation-title">BibTeX</h2>
+  <p id="paper-status" class="section-intro">Paper coming soon.</p>
+  <pre class="bibtex"><code>@misc{spins,
+  title = {{SPINS}: Sparsely-Supervised Human Novel View Synthesis
+           from a Single Image},
+  url   = {https://arid29.github.io/SPINS/},
+  note  = {Project page; paper forthcoming}
+}</code></pre>
+</section>
 <aside class="release-note reading-width" aria-label="Implementation note"><strong>Approximate implementation.</strong> Paper-specific code and checkpoints are coming soon.</aside>
 </main>
 <footer><p>SPINS · Sparsely-Supervised Human Novel View Synthesis</p><p class="credit">Project-page layout inspired by <a href="https://inter-pose.github.io/">InterPose</a>.</p></footer>

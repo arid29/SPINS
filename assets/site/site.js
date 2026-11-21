@@ -1,23 +1,15 @@
 (() => {
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const toggle = document.getElementById('animation-toggle');
   const animations = [...document.querySelectorAll('[data-animation]')];
   const visible = new Set();
   let playing = !motionPreference.matches;
-  let userSelected = false;
   function updateImage(img) {
     const src = playing && visible.has(img) ? img.dataset.animation : img.dataset.poster;
     if (img.getAttribute('src') !== src) img.src = src;
   }
-  function updatePlayback() {
-    toggle.textContent = playing ? 'Pause animations' : 'Play animations';
-    toggle.setAttribute('aria-pressed', String(!playing));
-    animations.forEach(updateImage);
-  }
-  toggle.hidden = false;
-  toggle.addEventListener('click', () => { userSelected = true; playing = !playing; updatePlayback(); });
   motionPreference.addEventListener('change', () => {
-    if (!userSelected) { playing = !motionPreference.matches; updatePlayback(); }
+    playing = !motionPreference.matches;
+    animations.forEach(updateImage);
   });
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
@@ -28,7 +20,7 @@
     }, { rootMargin: '120px' });
     animations.forEach(img => observer.observe(img));
   } else animations.forEach(img => visible.add(img));
-  updatePlayback();
+  animations.forEach(updateImage);
 
   const dialog = document.getElementById('figure-dialog');
   const expanded = document.getElementById('expanded-figure');
