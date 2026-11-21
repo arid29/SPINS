@@ -1,5 +1,7 @@
 # SPINS: Sparsely-Supervised Human Novel View Synthesis from a Single Image
 
+**[Visit the SPINS project page →](https://arid29.github.io/SPINS/)**
+
 Sparse-view supervision for feed-forward human 3D Gaussian reconstruction.
 
 <p align="center">
